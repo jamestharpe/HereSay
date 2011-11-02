@@ -1,0 +1,9 @@
+
+/src/HereSay.Core/obj
+/src/HereSay.Core/bin
+/src/HereSay.Website/bin
+/src/HereSay.Website/obj
+/src/HereSay.Website/App_Data/SearchIndex
+/src/HereSay.Website/App_Data/heresay_log.LDF
+/src/HereSay/bin
+/src/HereSay/obj

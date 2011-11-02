@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="HereSay.Themes.Boring.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title><n2:Display runat="server" ID="PageTitleDisplay" PropertyName="PageTitle" /></title>
+    <HereSay:MetaKeywords runat="server" ID="MetaKeywords" />
+    <HereSay:MetaDescription runat="server" ID="MetaDescription" />
+    <HereSay:LinkRelCanonical runat="server" ID="LinkRelCanonical" />
+    <link href="~/_hs/Themes/Boring/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1><n2:Display runat="server" ID="TitleDisplay" PropertyName="Title" /></h1>
+            </div>
+            <div class="loginDisplay">
+                <n2:DroppableZone runat="server" ID="HeadRightZone" ZoneName="SectionalHeadRight" />
+            </div>
+            <div class="clear hideSkiplink">
+                <n2:DroppableZone runat="server" ID="PrimaryNavigationZone" ZoneName="SectionalNavigation" />
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            <n2:DroppableZone runat="server" ID="ContentZone" ZoneName="Content" />
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        <n2:DroppableZone runat="server" ID="FooterZone" ZoneName="Footer" />
+        <n2:DroppableZone runat="server" ID="SectionalFooterZone" ZoneName="SectionalFooter" />
+    </div>
+    <n2:SlidingCurtain ID="ControlPanelCurtain" runat="server">
+        <n2:ControlPanel ID="ControlPanel" runat="server" />
+    </n2:SlidingCurtain>
+</body>
+</html>

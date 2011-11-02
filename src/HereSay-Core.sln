@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Core", "HereSay\HereSay.Core.csproj", "{2411666C-DD48-463F-8846-7C1544949A33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Website", "HereSay.Website\HereSay.Website.csproj", "{F1772711-5842-4BA1-8AF4-2FB3986137D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2411666C-DD48-463F-8846-7C1544949A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2411666C-DD48-463F-8846-7C1544949A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2411666C-DD48-463F-8846-7C1544949A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2411666C-DD48-463F-8846-7C1544949A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1772711-5842-4BA1-8AF4-2FB3986137D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1772711-5842-4BA1-8AF4-2FB3986137D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1772711-5842-4BA1-8AF4-2FB3986137D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1772711-5842-4BA1-8AF4-2FB3986137D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
