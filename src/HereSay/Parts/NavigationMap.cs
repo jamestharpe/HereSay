@@ -8,6 +8,7 @@ namespace HereSay.Parts
     [N2.PartDefinition(
         Title = "Navigation Map",
         IconUrl = "~/N2/Resources/icons/sitemap_color.png"),
+     N2.Integrity.AllowedZones(HereSayZones.NavigationMaps),
      N2.Integrity.RestrictParents(typeof(HomePage)),
      N2.Integrity.RestrictChildren(typeof(NavigationMapItem)),
      N2.Details.WithEditableTitle(Required = true, Title = "Map Name")]

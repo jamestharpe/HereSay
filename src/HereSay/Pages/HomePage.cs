@@ -14,10 +14,12 @@ namespace HereSay.Pages
         InstallerVisibility = N2.Installation.InstallerHint.NeverRootPage 
                             | N2.Installation.InstallerHint.PreferredStartPage,
         IconUrl = "~/N2/Resources/icons/house.png"),
-     N2.Integrity.RestrictParents(typeof(WebsiteRoot), typeof(LanguageHomeRedirectPage))]
+     N2.Integrity.RestrictParents(
+        typeof(WebsiteRoot), 
+        typeof(LanguageHomeRedirectPage))]
     public class HomePage : WebPage, N2.Web.ISitesSource
     {
-        [N2.Details.EditableChildren(EditModeFields.Navigation, EditModeFields.Navigation, 100, ContainerName = EditModeTabs.Navigation)]
+        [N2.Details.EditableChildren(EditModeFields.Navigation, EditModeFields.Navigation, 100, ContainerName = EditModeTabs.Navigation, ZoneName=HereSayZones.NavigationMaps)]
         public IList<NavigationMap> NavigationMaps
         {
             get { return this.GetPublishedChildren<NavigationMap>(true).ToList(); }

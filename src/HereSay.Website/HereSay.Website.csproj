@@ -68,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -101,6 +102,7 @@
     <Content Include="_hs\Themes\Boring\Parts\LanguageSwitcher.ascx" />
     <Content Include="_hs\Themes\Boring\Parts\NavigationMenu.ascx" />
     <Content Include="_hs\Themes\Boring\Parts\SearchResults.ascx" />
+    <Content Include="_hs\Themes\Boring\Parts\SyndicatedContent.ascx" />
     <Content Include="_hs\Themes\Boring\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="_hs\Themes\Boring\Scripts\jquery-1.4.1.js" />
     <Content Include="_hs\Themes\Boring\Scripts\jquery-1.4.1.min.js" />
@@ -134,6 +136,13 @@
     </Compile>
     <Compile Include="_hs\Themes\Boring\Parts\SearchResults.ascx.designer.cs">
       <DependentUpon>SearchResults.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="_hs\Themes\Boring\Parts\SyndicatedContent.ascx.cs">
+      <DependentUpon>SyndicatedContent.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_hs\Themes\Boring\Parts\SyndicatedContent.ascx.designer.cs">
+      <DependentUpon>SyndicatedContent.ascx</DependentUpon>
     </Compile>
     <Compile Include="_hs\Themes\Boring\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

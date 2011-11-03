@@ -12,7 +12,7 @@ namespace HereSay.Parts
         Title = "Meta Tag",
         Name = "MetaTag",
         IconUrl = "~/N2/Resources/icons/tag_blue.png"),
-     N2.Integrity.AllowedZones("HeadMeta"),
+     N2.Integrity.AllowedZones(HereSayZones.MetaTags),
      N2.Integrity.RestrictParents(typeof(WebPage)),
      N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None),
      N2.Details.WithEditableTitle("Title", 0, Required = true, RequiredMessage = "Title is required")]

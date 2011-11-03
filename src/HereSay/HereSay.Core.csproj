@@ -157,6 +157,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HereSayZones.cs" />
     <Compile Include="Parts\AddablePart.cs" />
     <Compile Include="Parts\Part.cs" />
     <Compile Include="AutoStarter.cs" />

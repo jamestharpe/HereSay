@@ -15,7 +15,12 @@ namespace HereSay.Parts
         /// <returns>The <see cref="Control"/> to be rendered.</returns>
         protected abstract Control CreateViewControl();
 
-        public System.Web.UI.Control AddTo(Control container)
+        /// <summary>
+        /// Adds the instance to the specified container.
+        /// </summary>
+        /// <param name="container">Specifies the container to which the instance should be added.</param>
+        /// <returns>The <see cref="Control"/> representing the current part.</returns>
+        public Control AddTo(Control container)
         {
             System.Web.UI.Control control = this.CreateViewControl();
             container.Controls.Add(control);
