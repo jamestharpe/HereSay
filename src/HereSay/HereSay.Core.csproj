@@ -195,7 +195,7 @@
     <Compile Include="Engine\IEngineExtensions.cs" />
     <Compile Include="Pages\WebPage.cs" />
     <Compile Include="RequestExtensionMethods.cs" />
-    <Compile Include="SafeUrlResponseModifier.cs" />
+    <Compile Include="ConsistentUrlResponseModifier.cs" />
     <Compile Include="SyndicationFormat.cs" />
     <Compile Include="UI\MetaDescription.cs" />
     <Compile Include="UI\MetaKeywords.cs" />

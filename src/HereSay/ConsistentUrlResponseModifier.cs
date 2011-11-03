@@ -4,14 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using N2.Definitions;
-using N2.Plugin;
 using HereSay.Definitions;
-using Rolcore.Web;
-using System.Diagnostics.Contracts;
+using N2.Definitions;
 using N2.Engine;
+using N2.Plugin;
 using Rolcore;
-using N2.Web;
+using Rolcore.Web;
 
 namespace HereSay
 {
@@ -20,10 +18,10 @@ namespace HereSay
     /// URL. This helps to prevent "duplicate" content in Google and other search engines.
     /// </summary>
     [AutoInitialize]
-    public class SafeUrlResponseModifier : AutoStarter
+    public class ConsistentUrlResponseModifier : AutoStarter
     {
-        private const string EnabledPropertyName = "SafeUrlResponseModifier.Enabled";
-        private const bool EnabledDefaultValue = true;
+        private const string DisabledPropertyName = "ConsistentUrlResponseModifier.Disabled";
+        private const bool DisabledDefaultValue = false;
 
         /// <summary>
         /// Forces the correct "safe" URL.
@@ -40,7 +38,7 @@ namespace HereSay
                 N2.ContentItem home = page.GetPublishedParents<Pages.HomePage>(true).FirstOrDefault();
 
                 bool enabled = (home != null)
-                    ? home.GetDetail<bool>(EnabledPropertyName, EnabledDefaultValue)
+                    ? ! home.GetDetail<bool>(DisabledPropertyName, DisabledDefaultValue)
                     : true;
 
                 if (!enabled)
@@ -81,8 +79,6 @@ namespace HereSay
 
         public override void Start()
         {
-            // foreach (ItemDefinition definition in this.Definitions)
-
             IEnumerable<ItemDefinition> homePageDefinitions = this.Definitions
                .Where(definition =>
                    IsPage(definition.ItemType)
@@ -103,22 +99,24 @@ namespace HereSay
                     int sortOrder = definition.GetMaxEditableSortOrder();
 
                     definition.AddEditableCheckBox(
-                        "Force Safe URLs",
+                        "Disable consistent URLs",
                         ++sortOrder,
                         EditModeTabs.Advanced,
-                        EnabledPropertyName,
-                        EnabledDefaultValue);
+                        DisabledPropertyName,
+                        DisabledDefaultValue,
+                        "Consistent URLs",
+                        "Forces URLs to be consistent by issuing a 301-redirect to clients that errors in the requested URL. For example: mysite.com/My-Page might be redirected to mysite.com/my-page/.");
                 }
             });
 
             EventBroker.Instance.AcquireRequestState += ApplicationInstance_AcquireRequestState;
 
-            Debug.WriteLine("SafeUrlResponseModifier Started");
+            Debug.WriteLine("ConsistentUrlResponseModifier Started");
         }
 
         public override void Stop()
         {
-            Debug.WriteLine("SafeUrlResponseModifier Stopped");
+            Debug.WriteLine("ConsistentUrlResponseModifier Stopped");
         }
     }
 }
