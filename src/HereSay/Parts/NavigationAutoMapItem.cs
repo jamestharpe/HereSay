@@ -18,7 +18,8 @@ namespace HereSay.Parts
         {
             get
             {
-                IList<NavigationMapItem> result = System.Web.HttpContext.Current.Cache[string.Format("auto_{0}{1}", this.Name, this.ID)] as IList<NavigationMapItem>;
+                string cacheKey = string.Format("auto_{0}{1}", this.Name, this.ID);
+                IList<NavigationMapItem> result = System.Web.HttpContext.Current.Cache[cacheKey] as IList<NavigationMapItem>;
 
                 if (result == null)
                 {
@@ -28,7 +29,7 @@ namespace HereSay.Parts
 
                     N2.ContentItem destination = this.DestinationWebPage;
                     result = base.MapItems;
-                    if(destination == null)
+                    if (destination == null)
                         return result;
 
                     //
@@ -39,7 +40,7 @@ namespace HereSay.Parts
                     IEnumerable<N2.ContentItem> childPages = Find.Items
                         .Where
                             .Parent.Eq(destination)
-                            //.And.State.Eq(ContentState.Published)
+                        //.And.State.Eq(ContentState.Published)
                             .And.Published.Le(now)
                             .And.Type.NotEq(typeof(CustomContent))              // Exclude items
                             .And.Type.NotEq(typeof(CustomCssContent))           // you wouldn't 
@@ -51,7 +52,8 @@ namespace HereSay.Parts
 
                     foreach (N2.ContentItem page in childPages)
                     {
-                        NavigationAutoMapItem autoChild = new NavigationAutoMapItem(){
+                        NavigationAutoMapItem autoChild = new NavigationAutoMapItem()
+                        {
                             DestinationWebPage = page,
                             Name = Guid.NewGuid().ToString(),
                             Published = now,
@@ -62,7 +64,7 @@ namespace HereSay.Parts
                         result.Add(autoChild);
                     }
 
-                    System.Web.HttpContext.Current.Cache[string.Format("auto_{0}{1}", this.Name, this.ID)] = result;
+                    System.Web.HttpContext.Current.Cache[cacheKey] = result;
                 }
                 return result;
             }

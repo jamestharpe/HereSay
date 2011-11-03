@@ -22,6 +22,24 @@ namespace HereSay.Themes.Boring {
         protected global::N2.Web.UI.WebControls.Display PageTitleDisplay;
         
         /// <summary>
+        /// MetaTags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::HereSay.UI.MetaTags MetaTags;
+        
+        /// <summary>
+        /// LinkRelCanonical control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::HereSay.UI.LinkRelCanonical LinkRelCanonical;
+        
+        /// <summary>
         /// HeadContent control.
         /// </summary>
         /// <remarks>

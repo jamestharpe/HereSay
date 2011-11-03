@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HereSay.Pages;
+using N2.Web.Parts;
+using System.Web.UI.WebControls;
 
 namespace HereSay.Parts
 {
@@ -9,11 +12,33 @@ namespace HereSay.Parts
         Title = "Meta Tag",
         Name = "MetaTag",
         IconUrl = "~/N2/Resources/icons/tag_blue.png"),
-     N2.Integrity.RestrictParents(typeof(HereSay.Pages.WebPage)),
+     N2.Integrity.AllowedZones("HeadMeta"),
+     N2.Integrity.RestrictParents(typeof(WebPage)),
      N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None),
      N2.Details.WithEditableTitle("Title", 0, Required = true, RequiredMessage = "Title is required")]
-    public class MetaTag : N2.ContentItem
+    public class MetaTag : AddablePart
     {
+        protected override System.Web.UI.Control CreateViewControl()
+        {
+            string content = string.Format(" content=\"{0}\"", Content); // Content is required
+
+            string httpEquiv = !string.IsNullOrWhiteSpace(HttpEquiv)
+                ? string.Format(" http-equiv=\"{0}\"", HttpEquiv)
+                : string.Empty;
+
+            string name = !string.IsNullOrWhiteSpace(TagName)
+                ? string.Format(" name=\"{0}\"", TagName)
+                : string.Empty;
+
+            string scheme = !string.IsNullOrWhiteSpace(Scheme)
+                ? string.Format(" scheme=\"{0}\"", Scheme)
+                : string.Empty;
+
+            Literal result = new Literal() { Text = string.Format("<meta{0}{1}{2}{3} />", name, httpEquiv, content, scheme) };
+
+            return result;
+        }
+
         [N2.Details.EditableTextBox("Content", 10, Required = true, RequiredMessage = "Content is required")]
         public string Content
         {

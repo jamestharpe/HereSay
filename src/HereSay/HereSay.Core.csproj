@@ -157,8 +157,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddOns\AddablePartAddOnItem.cs" />
-    <Compile Include="AddOns\AddOnItem.cs" />
+    <Compile Include="Parts\AddablePart.cs" />
+    <Compile Include="Parts\Part.cs" />
     <Compile Include="AutoStarter.cs" />
     <Compile Include="ContentItemExtensions.cs" />
     <Compile Include="Decorators\SectionalZoneDecorator.cs" />
@@ -197,10 +197,8 @@
     <Compile Include="RequestExtensionMethods.cs" />
     <Compile Include="ConsistentUrlResponseModifier.cs" />
     <Compile Include="SyndicationFormat.cs" />
-    <Compile Include="UI\MetaDescription.cs" />
-    <Compile Include="UI\MetaKeywords.cs" />
-    <Compile Include="UI\LinkRelCanonical.cs" />
     <Compile Include="UI\MetaTags.cs" />
+    <Compile Include="UI\LinkRelCanonical.cs" />
     <Compile Include="UI\WebPageTemplate.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -219,6 +217,7 @@
     <Compile Include="WebsiteRoot.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AddOns\" />
     <Folder Include="Protocols\" />
   </ItemGroup>
   <ItemGroup>

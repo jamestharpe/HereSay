@@ -9,7 +9,7 @@ namespace HereSay.Pages
                     + "language that needs to be supported. All content in that language should "
                     + "then be managed beneith the Language-specifc Home Page page.",
         IconUrl = "~/N2/Resources/icons/page_world.png",
-        SortOrder = PageSorting.RareUse,
+        SortOrder = PageSorting.VeryRareUse,
         InstallerVisibility = N2.Installation.InstallerHint.NeverRootPage 
                             | N2.Installation.InstallerHint.PreferredStartPage),
      N2.Integrity.RestrictParents(typeof(WebsiteRoot), typeof(HomePage), typeof(LanguageHomeRedirectPage))]

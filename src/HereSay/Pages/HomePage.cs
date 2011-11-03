@@ -62,10 +62,5 @@ namespace HereSay.Pages
         }
 
         #endregion
-
-        public static class Zones
-        {
-            public const string Navigation = "Navigation";
-        }
     }
 }

@@ -4,6 +4,9 @@ using Rolcore;
 
 namespace HereSay.Parts
 {
+    /// <summary>
+    /// A hyperlink that understand HereSay to enforce consistent URLs and common options.
+    /// </summary>
     [N2.Details.WithEditableTitle("Link text", 0, Required = false)]
     public class Hyperlink : N2.ContentItem
     {
@@ -11,6 +14,9 @@ namespace HereSay.Parts
 
         protected const string DestinationUrlItemKey = "DestinationUrl";
 
+        /// <summary>
+        /// Returns the Title of the <see cref="DestinationWebPage"/>.
+        /// </summary>
         protected string DefaultTitle
         {
             get
@@ -22,6 +28,9 @@ namespace HereSay.Parts
             }
         }
 
+        /// <summary>
+        /// Calcualtes the fully qualified URL if the <see cref="DestinationUrl"/> is relative.
+        /// </summary>
         protected string QualifiedDestinationUrl
         {
             get
@@ -42,6 +51,9 @@ namespace HereSay.Parts
             }
         }
 
+        /// <summary>
+        /// Specifies the page (if availabe) linked to.
+        /// </summary>
         protected N2.ContentItem DestinationWebPage
         {
             get
@@ -62,6 +74,9 @@ namespace HereSay.Parts
             }
         }
 
+        /// <summary>
+        /// Specifies if the rel="nofollow" attribute should be rendered.
+        /// </summary>
         [N2.Details.EditableCheckBox("Add rel=\"nofollow\"", 50)]
         public bool RelNoFollow
         {

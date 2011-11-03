@@ -9,8 +9,13 @@ namespace HereSay.Parts
         "HTML (Code)",
         IconUrl = "~/N2/Resources/icons/html.png"),
      N2.Details.WithEditableTitle(Title = "Block Name", Required = false, HelpText = "This value is not shown on the page, it is just here to help you keep organized.")]
-    public class HtmlBlock : N2.ContentItem, N2.Web.Parts.IAddablePart
+    public class HtmlBlock : AddablePart
     {
+        protected override System.Web.UI.Control CreateViewControl()
+        {
+            return new Literal { Text = this.Html };
+        }
+
         /// <summary>
         /// Gets and sets the HTML to be placed on the page.
         /// </summary>
@@ -20,17 +25,5 @@ namespace HereSay.Parts
             get { return (string)GetDetail("Html"); }
             set { SetDetail("Html", value, string.Empty); }
         }
-
-        #region IAddablePart Members
-
-        public System.Web.UI.Control AddTo(System.Web.UI.Control container)
-        {
-            Literal result = new Literal();
-            result.Text = this.Html;
-            container.Controls.Add(result);
-            return result;
-        }
-
-        #endregion
     }
 }
