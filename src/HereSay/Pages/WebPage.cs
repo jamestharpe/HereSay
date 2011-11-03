@@ -210,7 +210,7 @@ namespace HereSay.Pages
             set { SetDetail("MetaDescription", value, string.Empty); }
         }
 
-        [N2.Details.EditableChildren("Meta Tag Items", "MetaTagItems", 100, ContainerName = EditModeTabs.Advanced)]
+        [N2.Details.EditableChildren("Meta Tag Items", "MetaTagItems", 100, ContainerName = EditModeTabs.Advanced, ZoneName="HeadMeta")]
         public virtual IList<MetaTag> MetaTagItems
         {
             get { return new ItemList<MetaTag>(this.Children, new AccessFilter(), new TypeFilter(typeof(MetaTag))).ToList(); }
