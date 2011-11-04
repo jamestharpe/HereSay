@@ -12,12 +12,6 @@ namespace HereSay.Website._hs.Themes.Boring.Parts
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            foreach(SyndicationItem article in this.CurrentItem.Feed.Items)
-            {
-                article.Title;
-                article.Summary;
-                article.
-            }
         }
     }
 }

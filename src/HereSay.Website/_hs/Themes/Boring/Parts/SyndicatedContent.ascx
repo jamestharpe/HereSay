@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SyndicatedContent.ascx.cs" Inherits="HereSay.Website._hs.Themes.Boring.Parts.SyndicatedContent" %>
-<%
-    if (this.CurrentItem.Feed.Items.Any())
+<%  if (this.CurrentItem.Feed.Items.Any())
     {
         foreach (System.ServiceModel.Syndication.SyndicationItem feedItem in this.CurrentItem.Feed.Items)
         {%>
@@ -14,5 +13,4 @@
     else
     {%>
         Nothing to display.
-    <%}   
-%>
+  <%} %>
