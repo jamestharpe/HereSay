@@ -17,7 +17,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
-    <PublishUrl>http://localhost/Rollins.HereSay/</PublishUrl>
+    <PublishUrl>http://localhost/HereSay/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -103,30 +103,23 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="N2, Version=2.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\N2 v2.1.1\N2.dll</HintPath>
+    <Reference Include="N2">
+      <HintPath>..\..\lib\N2\N2.dll</HintPath>
     </Reference>
-    <Reference Include="N2.Extensions, Version=2.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\N2 v2.1.1\N2.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="N2.Management, Version=2.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\N2 v2.1.1\N2.Management.dll</HintPath>
+    <Reference Include="N2.Management">
+      <HintPath>..\..\lib\N2\N2.Management.dll</HintPath>
     </Reference>
     <Reference Include="N2.Security">
-      <HintPath>..\lib\N2 v2.1.1\N2.Security.dll</HintPath>
+      <HintPath>..\..\lib\N2\N2.Security.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\N2 v2.1.1\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\lib\N2\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore">
-      <HintPath>..\Rollins (Business Units)\Rollins (Core)\lib\Rolcore\Rolcore.dll</HintPath>
+      <HintPath>..\..\lib\Rolcore\Rolcore.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Web">
-      <HintPath>..\lib\Rolcore\Rolcore.Web.dll</HintPath>
+      <HintPath>..\..\lib\Rolcore\Rolcore.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -153,7 +146,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Yahoo.Yui.Compressor">
-      <HintPath>..\Rollins (Business Units)\Rollins (Core)\lib\Yahoo.Yui.Compressor v1.4.1.0\Yahoo.Yui.Compressor.dll</HintPath>
+      <HintPath>..\..\lib\Yahoo-Yui-Compressor\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

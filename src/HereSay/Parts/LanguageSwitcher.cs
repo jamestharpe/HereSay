@@ -64,7 +64,7 @@ namespace HereSay.Parts
                 {
                     _Translations = new List<ContentTranslation>();
 
-                    using (ItemFilter languageFilter = new CompositeFilter(new AccessFilter(), new PublishedFilter()))
+                    using (ItemFilter languageFilter = new AllFilter(new AccessFilter(), new PublishedFilter()))
                     {
                         IEnumerable<ContentItem> translationItems = LanguageGateway.FindTranslations(N2.Context.CurrentPage);
                         foreach (ContentItem translation in languageFilter.Pipe(translationItems))
