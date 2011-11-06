@@ -16,7 +16,9 @@ namespace HereSay.UI
 
         protected override void Render(HtmlTextWriter output)
         {
-            output.Write("<link rel=\"canonical\" href=\"{0}\" />", HttpContext.Current.GetFullyQualifiedCanonicalUrl());
+            output.Write(
+                "<link rel=\"canonical\" href=\"{0}\" />", 
+                HttpContext.Current.GetFullyQualifiedCanonicalUrl());
         }
     }
 }

@@ -191,6 +191,9 @@
     <Compile Include="RequestExtensionMethods.cs" />
     <Compile Include="ConsistentUrlResponseModifier.cs" />
     <Compile Include="SyndicationFormat.cs" />
+    <Compile Include="UI\Themed\Parts\TemplateBases.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UI\MetaTags.cs" />
     <Compile Include="UI\LinkRelCanonical.cs" />
     <Compile Include="UI\WebPageTemplate.cs">

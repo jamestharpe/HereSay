@@ -3,6 +3,7 @@ using System.ServiceModel.Syndication;
 using System.Xml;
 using HereSay.Pages;
 using Rolcore.Web.Syndication;
+using Rolcore;
 
 namespace HereSay.Parts
 {
@@ -92,7 +93,11 @@ namespace HereSay.Parts
                     }
                     catch (System.InvalidCastException)
                     {
-                        throw new System.InvalidCastException("Feed Url does not point to a valid Syndication Feed.");
+                        return new SyndicationFeed(new SyndicationItem[]{ 
+                            new SyndicationItem(
+                                "Error loading feed", 
+                                string.Empty, 
+                                feedUrl.ToUri()) { Summary = new TextSyndicationContent(string.Format("The Feed URL specified does not point to a valid syndication feed ({0}).", feedUrl)) } });
                     }
                     if (feedPage != null)
                         _Feed = (DisplayableItemCount > 0)
@@ -103,19 +108,30 @@ namespace HereSay.Parts
                         //
                         // Read the feed
 
-                        int displayableItemCount = this.DisplayableItemCount;
-                        using (XmlReader feedReader = XmlReader.Create(feedUrl)) //TODO: Allow caching
+                        try
                         {
-                            // It's worth mentioning here that the XmlReader would not work w/out a 
-                            // modification to the web.config file's 
-                            // /configuration/system.net/defaultProxy/proxy settings. See the following
-                            // url for details: http://west-wind.com/weblog/posts/3871.aspx                        
+                            int displayableItemCount = this.DisplayableItemCount;
+                            using (XmlReader feedReader = XmlReader.Create(feedUrl)) //TODO: Allow caching
+                            {
+                                // The XmlReader will not work w/out a modification to the web.config 
+                                // file's /configuration/system.net/defaultProxy/proxy settings. See 
+                                // the following url for details:
+                                // http://west-wind.com/weblog/posts/3871.aspx
 
-                            _Feed = (displayableItemCount > 0)
-                                ? SyndicationFeed.Load(feedReader).Reduce(displayableItemCount)
-                                : SyndicationFeed.Load(feedReader);
+                                _Feed = (displayableItemCount > 0)
+                                    ? SyndicationFeed.Load(feedReader).Reduce(displayableItemCount)
+                                    : SyndicationFeed.Load(feedReader);
 
-                            feedReader.Close();
+                                feedReader.Close();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            return new SyndicationFeed(new SyndicationItem[]{ 
+                                new SyndicationItem(
+                                    "Error loading feed", 
+                                    ex.StackTrace, 
+                                    feedUrl.ToUri()) { Summary = new TextSyndicationContent(ex.Message) } });
                         }
                     }
                 }

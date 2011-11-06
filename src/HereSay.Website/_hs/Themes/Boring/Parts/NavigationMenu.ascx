@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationMenu.ascx.cs" Inherits="HereSay._hs.Themes.Boring.Parts.NavigationMenu" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="HereSay.UI.Themed.Parts.NavigationMenuTemplate" %>
 <%@ Import Namespace="HereSay.Parts" %>
 
 <div class="menu">

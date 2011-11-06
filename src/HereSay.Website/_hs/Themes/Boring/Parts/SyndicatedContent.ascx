@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SyndicatedContent.ascx.cs" Inherits="HereSay.Website._hs.Themes.Boring.Parts.SyndicatedContent" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="HereSay.UI.Themed.Parts.SyndicatedContentTemplate" %>
 <%  if (this.CurrentItem.Feed.Items.Any())
     {
         foreach (System.ServiceModel.Syndication.SyndicationItem feedItem in this.CurrentItem.Feed.Items)

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchResults.ascx.cs" Inherits="HereSay._hs.Themes.Boring.Parts.SearchResults" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="HereSay.UI.Themed.Parts.SearchResultsTemplate" %>
 <%@ Import Namespace="HereSay.Pages" %>
 
 <% if (this.CurrentItem.Results.Any())

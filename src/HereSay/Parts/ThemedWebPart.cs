@@ -10,7 +10,10 @@ namespace HereSay.Parts
          EditModeTabs.LookAndFeelSortOrder)]
     public abstract class ThemedWebPart : ContentItem
     {
-        private string _TemplateUrl = null, _ThemeRoot = null;
+        private string 
+            _TemplateUrl, 
+            _ThemeRoot;
+
         private string[] _AvailableTemplates;
 
         protected virtual string ThemePartsRoot
