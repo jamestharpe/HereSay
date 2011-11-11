@@ -107,8 +107,12 @@ namespace HereSay
             if (N2.Context.CurrentPage != null)
             {
                 ILanguageGateway languageGateway = N2.Context.Current.Resolve<ILanguageGateway>();
+                if (languageGateway == null)
+                    return; // Not a multi-language website, nothing to do
                 httpContext.Items["LanguageGateway"] = languageGateway;
                 ILanguage currentLanguage = languageGateway.GetLanguage(N2.Context.CurrentPage);
+                if (currentLanguage == null)
+                    return; // Not a multi-language website, nothing to do
                 httpContext.Items["CurrentLanguage"] = currentLanguage;
                 cultureName = currentLanguage.LanguageCode;
             }
