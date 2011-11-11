@@ -5,6 +5,7 @@ using System.Web;
 using System.Diagnostics.Contracts;
 using Rolcore.Web;
 using Rolcore;
+using N2.Collections;
 
 namespace HereSay.Parts
 {
@@ -19,7 +20,13 @@ namespace HereSay.Parts
         [N2.Details.EditableChildren("Map Items", "MapItems", 100)]
         public virtual IList<NavigationMapItem> MapItems
         {
-            get { return this.Children.Cast<NavigationMapItem>().ToList(); }
+            get
+            {
+                return new ItemList<NavigationMapItem>(
+                    this.Children,
+                    new AccessFilter(),
+                    new TypeFilter(typeof(NavigationMapItem)));
+            }
         }
 
         /// <summary>

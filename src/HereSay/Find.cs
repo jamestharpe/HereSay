@@ -118,6 +118,9 @@ namespace HereSay
                     .Select(definition => definition.ItemType)
                     .ToArray();
 
+                if (typeImplementingPages.Length == 0)
+                    return new List<TContentItem>();
+
                 IEnumerable<TContentItem> result = Find.Items
                     .Where.Type.In(typeImplementingPages)
                         .And.Parent.Eq(parent)

@@ -8,3 +8,5 @@
 /src/HereSay/bin
 /src/HereSay/obj
 /src/HereSay.Website/HereSay.Website.Publish.xml
+/src/HereSay.Plugins/HereSay.Plugins.Caching/obj
+/src/HereSay.Plugins/HereSay.Plugins.Caching/bin

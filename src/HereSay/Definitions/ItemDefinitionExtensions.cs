@@ -99,7 +99,7 @@ namespace HereSay.Definitions
                 ContainerName = containerName,
                 Name = propertyKey,
                 HelpTitle = helpTitle,
-                HelpText = helpText,
+                HelpText = helpText
             };
 
             itemDefinition.Add(result);

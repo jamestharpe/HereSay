@@ -213,7 +213,13 @@ namespace HereSay.Pages
         [N2.Details.EditableChildren("Meta Tag Items", "MetaTagItems", 100, ContainerName = EditModeTabs.Advanced, ZoneName=HereSayZones.MetaTags)]
         public virtual IList<MetaTag> MetaTagItems
         {
-            get { return new ItemList<MetaTag>(this.Children, new AccessFilter(), new TypeFilter(typeof(MetaTag))).ToList(); }
+            get
+            {
+                return new ItemList<MetaTag>(
+                    this.Children,
+                    new AccessFilter(),
+                    new TypeFilter(typeof(MetaTag)));
+            }
         }
 
         #endregion Page Information

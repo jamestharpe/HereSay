@@ -5,6 +5,7 @@ using System.Text;
 using HereSay.Parts;
 using Rolcore.Web;
 using System.Web;
+using N2.Collections;
 
 namespace HereSay.Pages
 {
@@ -22,7 +23,13 @@ namespace HereSay.Pages
         [N2.Details.EditableChildren(EditModeFields.Navigation, EditModeFields.Navigation, 100, ContainerName = EditModeTabs.Navigation, ZoneName=HereSayZones.NavigationMaps)]
         public IList<NavigationMap> NavigationMaps
         {
-            get { return this.GetPublishedChildren<NavigationMap>(true).ToList(); }
+            get
+            {
+                return new ItemList<NavigationMap>(
+                    this.Children,
+                    new AccessFilter(),
+                    new TypeFilter(typeof(NavigationMap)));
+            }
         }
 
         [Details.EditableDropDownList(EditModeFields.Theme, 5, "AvailableThemes", ContainerName = EditModeTabs.LookAndFeelName)]

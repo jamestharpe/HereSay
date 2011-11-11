@@ -2,6 +2,7 @@
 using System.Linq;
 using HereSay.Pages;
 using System.Diagnostics.Contracts;
+using N2.Collections;
 
 namespace HereSay.Parts
 {
@@ -24,7 +25,10 @@ namespace HereSay.Parts
             get 
             { 
                 if(this._MapItems == null)
-                    this._MapItems = this.GetPublishedChildren<NavigationMapItem>(true).ToList();
+                    this._MapItems = new ItemList<NavigationMapItem>(
+                        this.Children,
+                        new AccessFilter(),
+                        new TypeFilter(typeof(NavigationMapItem)));
 
                 return this._MapItems;
             }
