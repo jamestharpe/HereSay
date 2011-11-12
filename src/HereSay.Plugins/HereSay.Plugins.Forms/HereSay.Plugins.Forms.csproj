@@ -37,6 +37,9 @@
     <Reference Include="Rolcore">
       <HintPath>..\..\..\lib\Rolcore\Rolcore.dll</HintPath>
     </Reference>
+    <Reference Include="Rolcore.Net">
+      <HintPath>..\..\..\lib\Rolcore\Rolcore.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Rolcore.Web">
       <HintPath>..\..\..\lib\Rolcore\Rolcore.Web.dll</HintPath>
     </Reference>
@@ -53,6 +56,9 @@
     <Compile Include="Form.cs" />
     <Compile Include="FormAction.cs" />
     <Compile Include="FormContentSaveAction.cs" />
+    <Compile Include="FormEmailAction.cs" />
+    <Compile Include="FormExpressionValidator.cs" />
+    <Compile Include="FormRedirecter.cs" />
     <Compile Include="FormSubmission.cs" />
     <Compile Include="FormSubmissionField.cs" />
     <Compile Include="FormUtils.cs" />

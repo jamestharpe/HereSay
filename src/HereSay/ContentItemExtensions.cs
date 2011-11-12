@@ -151,7 +151,7 @@ namespace HereSay
                 result = siteBaseUrl.ToString(); // contentItem.Url.ToUri(siteBaseUrl).ToString();
             else
             {
-                StringBuilder resultBuilder = new StringBuilder(safeParent.GetSafeUrl() + contentItem.Name);
+                StringBuilder resultBuilder = new StringBuilder(safeParent.GetSafeUrl().EnsureTrailing('/') + contentItem.Name);
 
                 if (contentItem.Children.Any(item => item.IsPage))
                 //if (contentItem.GetPublishedChildren<N2.ContentItem>(true).Any(item => item.IsPage))
