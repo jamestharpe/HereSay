@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,6 +61,7 @@
     <Compile Include="FormExpressionValidator.cs" />
     <Compile Include="FormRedirecter.cs" />
     <Compile Include="FormSubmission.cs" />
+    <Compile Include="FormSubmissionsFeed.cs" />
     <Compile Include="FormSubmissionField.cs" />
     <Compile Include="FormUtils.cs" />
     <Compile Include="FormValidator.cs" />
