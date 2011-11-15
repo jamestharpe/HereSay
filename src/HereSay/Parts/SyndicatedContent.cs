@@ -19,7 +19,7 @@ namespace HereSay.Parts
      N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None),
      N2.Details.WithEditableTitle(
          Title = "Display Name",
-         ContainerName = EditModeTabs.Content,
+         ContainerName = EditModeTabs.Cons tent,
          HelpText = "This value is not shown on the page, it is just here to help you keep organized.",
          Required = true, RequiredMessage = "Display Name is required.")]
     public class SyndicatedContent : ThemedWebPart
@@ -33,7 +33,7 @@ namespace HereSay.Parts
         [N2.Details.EditableUrl("Feed Url", 5,
             ContainerName = EditModeTabs.Content, 
             AvailableModes = N2.Web.UI.WebControls.UrlSelectorMode.Items,
-            OpeningMode = N2.Web.UI.WebControls.UrlSelectorMode.Items,
+            OpeningMode = N2.Web.UI. WebControls.UrlSelectorMode.Items,
             RelativeTo = N2.Web.UI.WebControls.UrlRelativityMode.Absolute,
             RelativeWhen = N2.Details.RelativityMode.ImportingOrExporting,
             Required = true, RequiredMessage = "Feed Url is required.", 
