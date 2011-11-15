@@ -19,7 +19,7 @@ namespace HereSay.Parts
      N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None),
      N2.Details.WithEditableTitle(
          Title = "Display Name",
-         ContainerName = EditModeTabs.Cons tent,
+         ContainerName = EditModeTabs.Content,
          HelpText = "This value is not shown on the page, it is just here to help you keep organized.",
          Required = true, RequiredMessage = "Display Name is required.")]
     public class SyndicatedContent : ThemedWebPart

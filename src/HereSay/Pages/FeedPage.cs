@@ -20,10 +20,6 @@ namespace HereSay.Pages
         InstallerVisibility = N2.Installation.InstallerHint.NeverRootOrStartPage,
         TemplateUrl = CustomTextContent.HttpHandlerTemplateUrl,
         IconUrl = "~/N2/Resources/icons/rss_feed.gif"),
-     N2.Web.UI.TabContainer(
-         EditModeTabs.PageInformationName,
-         EditModeTabs.PageInformationTitle,
-         EditModeTabs.PageInformationSortOrder),
      WithEditableTitle("Feed Title", 10, ContainerName = EditModeTabs.PageInformationName, Required = true, RequiredMessage = "Feed Title is required."),
      WithEditableName("Path Segment", 20, ContainerName = EditModeTabs.PageInformationName, Required = true, RequiredMessage = "Path Segment is required.")]
     public class FeedPage : FeedPageBase
