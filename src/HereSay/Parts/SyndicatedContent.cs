@@ -4,20 +4,23 @@ using System.Xml;
 using HereSay.Pages;
 using Rolcore.Web.Syndication;
 using Rolcore;
+using N2;
+using N2.Web.UI;
+using N2.Details;
 
 namespace HereSay.Parts
 {
-    [N2.PartDefinition(
+    [PartDefinition(
         Name = "SyndicatedContent", // compatability issue with legacy items
         Title = "Syndicated Content",
         IconUrl = "~/N2/Resources/icons/rss.png"),
-     N2.Web.UI.TabContainer(
+     TabContainer(
          EditModeTabs.Content,
          EditModeTabs.Content,
          EditModeTabs.ContentSortOrder),
      N2.Integrity.RestrictParents(typeof(WebPage)),
      N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None),
-     N2.Details.WithEditableTitle(
+     WithEditableTitle(
          Title = "Display Name",
          ContainerName = EditModeTabs.Content,
          HelpText = "This value is not shown on the page, it is just here to help you keep organized.",
@@ -30,12 +33,12 @@ namespace HereSay.Parts
         /// Gets and sets the Url for the Feed to be used within the display. 
         /// Can be an absolute or relative Url.
         /// </summary>
-        [N2.Details.EditableUrl("Feed Url", 5,
+        [EditableUrl("Feed Url", 5,
             ContainerName = EditModeTabs.Content, 
             AvailableModes = N2.Web.UI.WebControls.UrlSelectorMode.Items,
             OpeningMode = N2.Web.UI. WebControls.UrlSelectorMode.Items,
             RelativeTo = N2.Web.UI.WebControls.UrlRelativityMode.Absolute,
-            RelativeWhen = N2.Details.RelativityMode.ImportingOrExporting,
+            RelativeWhen = RelativityMode.ImportingOrExporting,
             Required = true, RequiredMessage = "Feed Url is required.", 
             HelpText = "This MUST be a URL to an ATOM or RSS feed.")]
         public virtual string FeedUrl
@@ -63,7 +66,7 @@ namespace HereSay.Parts
         /// Gets and sets the maximum number of articles to display. Use zero to represent 
         /// infinity.
         /// </summary>
-        [N2.Details.EditableTextBox("Max Items to Display (0=infinity)", 15, 
+        [EditableTextBox("Max Items to Display (0=infinity)", 15, 
             ContainerName = EditModeTabs.Content,
             ValidationExpression = "^([-]|[0-9])[0-9]*$", 
             ValidationMessage = "Must be an integer.",
@@ -83,7 +86,6 @@ namespace HereSay.Parts
 
                 string feedUrl = this.FeedUrl;
 
-
                 if (_Feed == null && !String.IsNullOrWhiteSpace(feedUrl))
                 {
                     FeedPage feedPage;
@@ -93,11 +95,15 @@ namespace HereSay.Parts
                     }
                     catch (System.InvalidCastException)
                     {
-                        return new SyndicationFeed(new SyndicationItem[]{ 
-                            new SyndicationItem(
-                                "Error loading feed", 
-                                string.Empty, 
-                                feedUrl.ToUri()) { Summary = new TextSyndicationContent(string.Format("The Feed URL specified does not point to a valid syndication feed ({0}).", feedUrl)) } });
+                        return new SyndicationFeed(
+                            "Invalid feed URL", 
+                            string.Empty, 
+                            this.FeedUrl.ToUri(),
+                            new SyndicationItem[]{ 
+                                new SyndicationItem("Error loading feed", string.Empty, feedUrl.ToUri()) { 
+                                    Summary = new TextSyndicationContent(string.Format("The Feed URL specified does not point to a valid syndication feed ({0}).", feedUrl)) 
+                                } 
+                            });
                     }
                     if (feedPage != null)
                         _Feed = (DisplayableItemCount > 0)
@@ -127,11 +133,18 @@ namespace HereSay.Parts
                         }
                         catch (Exception ex)
                         {
-                            return new SyndicationFeed(new SyndicationItem[]{ 
-                                new SyndicationItem(
-                                    "Error loading feed", 
-                                    ex.StackTrace, 
-                                    feedUrl.ToUri()) { Summary = new TextSyndicationContent(ex.Message) } });
+                            return new SyndicationFeed(
+                                "Error loading feed",
+                                ex.Message,
+                                this.FeedUrl.ToUri(),
+                                new SyndicationItem[]{ 
+                                    new SyndicationItem(
+                                        "Error loading feed", 
+                                        ex.StackTrace, 
+                                        feedUrl.ToUri()) { 
+                                        Summary = new TextSyndicationContent(ex.Message) 
+                                    } 
+                                });
                         }
                     }
                 }

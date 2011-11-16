@@ -11,17 +11,13 @@ namespace HereSay.Plugins.Forms
         Title = "Form Submission",
         Name = "FormSubmission",
         IconUrl = "~/N2/Resources/icons/report.png"),
-     N2.Web.UI.TabContainer(
-        EditModeTabs.Content,
-        EditModeTabs.Content,
-        EditModeTabs.ContentSortOrder),
      N2.Integrity.RestrictParents(typeof(Form)),
      N2.Integrity.RestrictChildren(typeof(FormSubmission), typeof(FormSubmissionField))]
     public class FormSubmission : Part
     {
 
-        [N2.Details.EditableChildren("Items", "Items", 100, ContainerName = EditModeTabs.Content)]
-        public virtual IList<FormSubmissionField> Items
+        [N2.Details.EditableChildren("Fields", HereSayZones.Data, 100)]
+        public virtual IList<FormSubmissionField> Fields
         {
             get {
                 return new ItemList<FormSubmissionField>(

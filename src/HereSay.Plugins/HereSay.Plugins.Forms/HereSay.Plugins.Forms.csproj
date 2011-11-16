@@ -65,6 +65,7 @@
     <Compile Include="FormSubmissionField.cs" />
     <Compile Include="FormUtils.cs" />
     <Compile Include="FormValidator.cs" />
+    <Compile Include="IFormSubmissionsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

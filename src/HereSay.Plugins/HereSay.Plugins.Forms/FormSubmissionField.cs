@@ -15,9 +15,7 @@ namespace HereSay.Plugins.Forms
         IconUrl = "~/N2/Resources/icons/textfield.png"),
      RestrictParents(typeof(FormSubmission)),
      RestrictChildren(AllowedTypes.None),
-     WithEditableName("Name", 100),
+     WithEditableName("Field Name", 100),
      WithEditableTitle("Value", 200)]
-    public class FormSubmissionField : Part
-    {
-    }
+    public class FormSubmissionField : Part { }
 }

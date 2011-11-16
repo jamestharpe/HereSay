@@ -7,13 +7,14 @@ using Rolcore.Web;
 using System.Xml;
 using N2.Details;
 using System.Web.UI.WebControls;
+using N2.Web.UI;
 
 namespace HereSay.Pages
 {
     /// <summary>
     /// Base class for creating pages that syndicate content via an XML feed such as RSS or ATOM.
     /// </summary>
-    [N2.Web.UI.TabContainer(
+    [TabContainer(
         EditModeTabs.PageInformationName,
         EditModeTabs.PageInformationTitle,
         EditModeTabs.PageInformationSortOrder)]

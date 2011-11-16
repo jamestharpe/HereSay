@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using Rolcore.Web.UI;
+using System;
 
 namespace HereSay.Plugins.Forms
 {
@@ -17,16 +18,18 @@ namespace HereSay.Plugins.Forms
 
             foreach (string key in formFields.AllKeys)
             {
+                string fieldName = WebUtils.GetFormControlNameFromPostbackName(key);
                 bool addToResult = !(
                        removeAspNetFields &&
-                       (string.Equals(key, "__eventvalidation", System.StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(key, "__eventargument", System.StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(key, "__eventtarget", System.StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(key, "__viewstate", System.StringComparison.OrdinalIgnoreCase)));
+                       (string.Equals(fieldName, "__eventvalidation", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fieldName, "__eventargument", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fieldName, "__eventtarget", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fieldName, "__viewstate", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(fieldName, Form.FormIdFieldName, StringComparison.OrdinalIgnoreCase)));
 
                 if (addToResult)
                     result.Add(
-                        WebUtils.GetFormControlNameFromPostbackName(key),
+                        fieldName,
                         formFields[key]);
             };
 

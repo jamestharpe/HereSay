@@ -35,7 +35,7 @@ namespace HereSay.Plugins.Forms
         EditModeTabs.FormActionTitle,
         EditModeTabs.FormActionSortOrder),
      N2.Integrity.RestrictParents(typeof(WebPage)),
-     N2.Integrity.RestrictChildren(typeof(FormAction), typeof(FormValidator), typeof(FormSubmission)),
+     N2.Integrity.RestrictChildren(typeof(FormAction), typeof(FormValidator)),
      N2.Details.WithEditableTitle(Title = "Form Name", ContainerName = EditModeTabs.Content, Required = true,
          HelpText = "This value is not shown on the page, it is just here to help you keep organized.")]
     public class Form : N2.ContentItem, N2.Web.Parts.IAddablePart
@@ -43,6 +43,8 @@ namespace HereSay.Plugins.Forms
         // Does not inherit from AddablePart because access to container is needed to access the 
         // ASP.NET page, which is required to render server-side forms.
     {
+        public const string FormIdFieldName = "__hsFormId";
+
         #region UI Properties
 
         [N2.Details.EditableFreeTextArea("Content", 200, ContainerName = EditModeTabs.Content)] //TODO: Validate <form>..</form> exists in content
@@ -138,9 +140,8 @@ namespace HereSay.Plugins.Forms
             //
             // Check for submision
 
-            const string formIdFieldName = "hs_formId";
             string postedFormId = WebUtils.GetFormControlValueByFormControlId(
-                formIdFieldName,
+                FormIdFieldName,
                 (HttpContext.Current.Request.RequestType == "POST")
                     ? HttpContext.Current.Request.Form
                     : HttpContext.Current.Request.QueryString);
@@ -178,9 +179,9 @@ namespace HereSay.Plugins.Forms
             //
             // Hidden field to use as the form identifier
 
-            HtmlInputHidden formIdHiddenFIeld = new HtmlInputHidden { 
-                ID = formIdFieldName, 
-                Name = formIdFieldName, 
+            HtmlInputHidden formIdHiddenFIeld = new HtmlInputHidden {
+                ID = FormIdFieldName,
+                Name = FormIdFieldName, 
                 Value = expectedFormId };
 
             if (currentPage.ControlsOfType<HtmlForm>(true).Count() > 0)

@@ -7,6 +7,7 @@
     {
         public const string 
             MetaTags = "hs_MetaTags",
-            NavigationMaps = "hs_NavigationMaps";
+            NavigationMaps = "hs_NavigationMaps",
+            Data = "hs_Data";
     }
 }
