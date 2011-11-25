@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using N2;
 using N2.Edit.Workflow;
+using Rolcore;
 using Rolcore.Web;
 using Rolcore.Web.Protocols;
 using HereSay.Decorators;
@@ -56,7 +57,7 @@ namespace HereSay.Pages
             foreach (N2.ContentItem page in pages)
             {
                 string url = (page is WebPage)
-                    ? ((WebPage)page).CanonicalUrl
+                    ? ((WebPage)page).CanonicalUrl //TODO: Fully qualify
                     : page.GetSafeUrl();
 
                 if (!result.Where(item => item.Loc == url).Any())

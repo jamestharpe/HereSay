@@ -2,6 +2,7 @@
 using HereSay.Parts;
 using System.Linq;
 using N2.Collections;
+using HereSay.Details;
 
 namespace HereSay.Pages
 {
@@ -56,7 +57,7 @@ namespace HereSay.Pages
             PageTemplateDefaultName = "WebPage",
             PageTemplateSearchPatternFormat = "*{0}" + PageTemplateFileExtension;
 
-        [Details.EditableDropDownList("Template", 5, "AvailableTemplates", ContainerName = EditModeTabs.LookAndFeelName)]
+        [EditableDropDownList("Template", 5, "AvailableTemplates", ContainerName = EditModeTabs.LookAndFeelName)]
         public virtual string TemplateName
         {
             get { return this.GetDetail<string>("TemplateName", this.AvailableTemplates[0]); }
@@ -82,7 +83,7 @@ namespace HereSay.Pages
         /// Gets and sets the theme name for the current web page. If no value has been set the 
         /// value from the parent is returned.
         /// </summary>
-        [Details.EditableDropDownList("Theme", 5, "AvailableThemes", ContainerName = EditModeTabs.LookAndFeelName)]
+        [EditableDropDownList("Theme", 5, "AvailableThemes", ContainerName = EditModeTabs.LookAndFeelName)]
         public virtual string ThemeName
         {
             get

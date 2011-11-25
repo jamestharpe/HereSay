@@ -55,15 +55,25 @@ namespace HereSay.Pages
             }
         }
 
+        protected int MaxNumberOfItemsToDisplayOrDefault
+        {
+            get
+            {
+                return (this.MaxNumberOfItemsToDisplay < 1)
+                    ? int.MaxValue
+                    : this.MaxNumberOfItemsToDisplay;
+            }
+        }
+
         #region Properties limiting which items get displayed
         /// <summary>
         /// Gets and sets the maximum number of articles to display. Use a negative number (e.g. 
         /// -1) to represent infinity.
         /// </summary>
-        [EditableTextBox("Max # Items to Display (-1=infinity)", 75, Validate = true, ValidationExpression = "^([-]|[0-9])[0-9]*$", ValidationMessage = "Must be an integer.", ContainerName = EditModeTabs.Content)]
+        [EditableTextBox("Max # Items to Display (0=infinity)", 75, Validate = true, ValidationExpression = "^([-]|[0-9])[0-9]*$", ValidationMessage = "Must be an integer.", ContainerName = EditModeTabs.Content)]
         public virtual int MaxNumberOfItemsToDisplay
         {
-            get { return GetDetail<int>("MaxNumberOfItemsToDisplay", -1); }
+            get { return GetDetail<int>("MaxNumberOfItemsToDisplay", 0); }
             set { SetDetail<int>("MaxNumberOfItemsToDisplay", value); }
         }
 

@@ -11,5 +11,7 @@ namespace HereSay.Plugins.Forms
         /// Gets form submissions.
         /// </summary>
         IList<FormSubmission> Submissions { get; }
+        Form Form { get; }
+        string Name { get; }
     }
 }

@@ -6,7 +6,7 @@ using System;
 
 namespace HereSay.Plugins.Forms
 {
-    internal static class FormUtils
+    public static class FormUtils
     {
         public static NameValueCollection NameValueCollectionFromRequest(HttpRequest request, bool removeAspNetFields = true)
         {

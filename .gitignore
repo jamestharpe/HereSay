@@ -10,3 +10,5 @@
 /src/HereSay.Website/HereSay.Website.Publish.xml
 /src/HereSay.Plugins/HereSay.Plugins.Caching/obj
 /src/HereSay.Plugins/HereSay.Plugins.Caching/bin
+/src/HereSay.Plugins/HereSay.Plugins.Forms/bin/
+/src/HereSay.Plugins/HereSay.Plugins.Forms/obj/

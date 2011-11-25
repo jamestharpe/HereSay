@@ -57,7 +57,7 @@ namespace HereSay.Details
             else
                 defaultValue = string.Empty;
 
-            listControl.SelectedValue = (item[this.Name] ?? defaultValue).ToString();
+            listControl.SelectedValue = (item[this.Name] ?? defaultValue);
         }
 
         public override bool UpdateItem(N2.ContentItem item, Control editor)

@@ -61,6 +61,7 @@
     <Compile Include="FormExpressionValidator.cs" />
     <Compile Include="FormRedirecter.cs" />
     <Compile Include="FormSubmission.cs" />
+    <Compile Include="FormSubmissionExtensions.cs" />
     <Compile Include="FormSubmissionsFeed.cs" />
     <Compile Include="FormSubmissionField.cs" />
     <Compile Include="FormUtils.cs" />

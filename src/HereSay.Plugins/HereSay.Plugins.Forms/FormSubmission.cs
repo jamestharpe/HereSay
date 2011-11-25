@@ -26,5 +26,16 @@ namespace HereSay.Plugins.Forms
                     new TypeFilter(typeof(FormSubmissionField)));
             }
         }
+
+        public IList<FormSubmission> ChildSubmissions
+        {
+            get
+            {
+                return new ItemList<FormSubmission>(
+                    this.Children,
+                    new AccessFilter(),
+                    new TypeFilter(typeof(FormSubmission)));
+            }
+        }
     }
 }
