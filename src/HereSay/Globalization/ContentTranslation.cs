@@ -7,8 +7,6 @@ namespace HereSay.Globalization
 {
     public class ContentTranslation
     {
-        private ContentItem _Content;
-        private ILanguage _Language;
 
         public ContentTranslation(ContentItem content, ILanguage language)
         {
@@ -17,20 +15,12 @@ namespace HereSay.Globalization
             if (language == null)
                 throw new ArgumentNullException("language", "language is null.");
 
-            this._Content = content;
-            this._Language = language;
+            this.Page = content;
+            this.Language = language;
         }
 
-        public ContentItem Page
-        {
-            get { return _Content; }
-            set { _Content = value; }
-        }
+        public ContentItem Page { get; set; }
 
-        public ILanguage Language
-        {
-            get { return _Language; }
-            set { _Language = value; }
-        }
+        public ILanguage Language { get; set; }
     }
 }

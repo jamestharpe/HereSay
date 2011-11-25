@@ -187,8 +187,8 @@ namespace HereSay.Pages
         [N2.Details.EditableTextBox("Page Title", 10, ContainerName = EditModeTabs.PageInformationName)]
         public virtual string PageTitle
         {
-            get { return (string)(GetDetail("PageTitle") ?? this.Title); }
-            set { SetDetail("PageTitle", value, string.Empty); }
+            get { return GetDetail<string>("PageTitle", this.Title); }
+            set { SetDetail<string>("PageTitle", value); }
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace HereSay.Pages
                 else
                 {
                     string[] parts = LanguageCode.Split('-');
-                    return string.Format("~/N2/Resources/img/Globalization/flags/{0}.png", parts[parts.Length - 1]);
+                    return string.Format("~/N2/Resources/img/flags/{0}.png", parts[parts.Length - 1]);
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace HereSay.Pages
                 SetDetail("LanguageCode", value);
                 if (!string.IsNullOrEmpty(value))
                 {
-                    string languageTitle = (new CultureInfo(LanguageCode)).DisplayName;
+                    string languageTitle = (new CultureInfo(LanguageCode)).NativeName;
                     SetDetail<string>("LanguageTitle", languageTitle);
                 }
                 else
@@ -51,7 +51,7 @@ namespace HereSay.Pages
 
         public string LanguageTitle
         {
-            get { return GetDetail<string>("LanguageCode", string.Empty); }
+            get { return GetDetail<string>("LanguageTitle", string.Empty); }
         }
         #endregion
     }

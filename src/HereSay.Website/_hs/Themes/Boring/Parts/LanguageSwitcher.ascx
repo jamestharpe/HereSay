@@ -5,7 +5,8 @@
 
 <% foreach (ContentTranslation translation in this.CurrentItem.Translations){
     if (translation.Language.LanguageTitle != LanguageSwitcher.CurrentLanguage.LanguageTitle)
-    { 
-        %><img src="<%= translation.Language.FlagUrl %>" alt="<%= translation.Language.LanguageTitle %>" /><a class="language" href="<%= translation.Page.GetSafeUrl() %>"><%= translation.Language.LanguageTitle %></a>&nbsp;<%
+    {
+        string shortLanguageTitle = translation.Language.LanguageTitle.Substring(0, translation.Language.LanguageTitle.IndexOf(' '));
+        %><img src="<%= N2.Web.Url.ToAbsolute(translation.Language.FlagUrl) %>" alt="<%= shortLanguageTitle %>" /><a class="language" href="<%= translation.Page.GetSafeUrl() %>"><%= shortLanguageTitle%></a>&nbsp;<%
     }
 } %>

@@ -1921,10 +1921,6 @@
     <Content Include="_hs\Themes\Boring\Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Forms\HereSay.Plugins.Forms.csproj">
-      <Project>{5DDD7435-BA81-439B-BA50-4A447CB50EEC}</Project>
-      <Name>HereSay.Plugins.Forms</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HereSay\HereSay.Core.csproj">
       <Project>{2411666C-DD48-463F-8846-7C1544949A33}</Project>
       <Name>HereSay.Core</Name>
