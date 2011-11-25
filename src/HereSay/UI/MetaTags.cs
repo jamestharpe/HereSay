@@ -5,6 +5,7 @@ using HereSay.Parts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
+using N2.Engine.Globalization;
 
 namespace HereSay.UI
 {
@@ -25,7 +26,11 @@ namespace HereSay.UI
             if (page == null)
                 return;
 
-            // <meta name="keywords" content="pest control services, pest treatment" />
+            ILanguage pageLanguage = page.GetLanguage();
+            MetaTag languageMetaTag = (pageLanguage != null)
+                ? new MetaTag() { HttpEquiv = "Content-Language", Content = pageLanguage.LanguageCode }
+                : null;
+
             IEnumerable<MetaTag> tags = (new MetaTag[]{
                                             new MetaTag() { TagName = "keywords", Content = page.MetaKeywords },
                                             new MetaTag() { TagName = "description", Content = page.MetaDescription } })
@@ -34,6 +39,9 @@ namespace HereSay.UI
             ContentPlaceHolder container = new ContentPlaceHolder();
             foreach (MetaTag tag in tags)
                 tag.AddTo(container);
+
+            if (languageMetaTag != null)
+                languageMetaTag.AddTo(container);
 
             container.RenderControl(output);
         }

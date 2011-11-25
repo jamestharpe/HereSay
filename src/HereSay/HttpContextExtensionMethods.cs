@@ -57,7 +57,7 @@ namespace HereSay
                 if ((userLanguages != null) && (userLanguages.Length > 0))
                 {
                     IEnumerable<ContentItem> languages = N2.Context.Current
-                        .GetAvailableLanguages()
+                        .GetLanguageGateway().GetAvailableLanguages()
                         .Cast<ContentItem>();
 
                     foreach (string userLanguage in userLanguages)

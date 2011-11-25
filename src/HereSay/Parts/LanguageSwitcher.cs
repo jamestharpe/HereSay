@@ -42,43 +42,14 @@ namespace HereSay.Parts
             }
         }
 
-        public static ILanguage CurrentLanguage
+        public ILanguage CurrentLanguage
         {
-            get
-            {
-                ILanguage result = HttpContext.Current.Items["CurrentLanguage"] as ILanguage;
-                if (result == null)
-                {
-                    result = LanguageGateway.GetLanguage(N2.Context.CurrentPage);
-                    HttpContext.Current.Items["CurrentLanguage"] = result;
-                }
-                return result;
-            }
+            get { return this.Page.GetLanguage(); }
         }
 
-        public List<ContentTranslation> Translations
+        public IEnumerable<ContentTranslation> Translations
         {
-            get
-            {
-                if ((_Translations == null) && (LanguageGateway.Enabled))
-                {
-                    _Translations = new List<ContentTranslation>();
-
-                    using (ItemFilter languageFilter = new CompositeFilter(new AccessFilter(), new PublishedFilter()))
-                    {
-                        IEnumerable<ContentItem> translationItems = LanguageGateway.FindTranslations(N2.Context.CurrentPage);
-                        foreach (ContentItem translation in languageFilter.Pipe(translationItems))
-                        {
-                            ILanguage language = LanguageGateway.GetLanguage(translation);
-                            // Hide translations when filtered access to their language
-                            ContentItem languageItem = language as ContentItem;
-                            if (languageItem == null || languageFilter.Match(languageItem))
-                                _Translations.Add(new ContentTranslation(translation, language));
-                        }
-                    }
-                }
-                return _Translations;
-            }
+            get { return this.Page.GetTranslations(); }
         }
     }
 }

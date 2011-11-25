@@ -8,7 +8,7 @@ namespace HereSay.Parts
          EditModeTabs.LookAndFeelName,
          EditModeTabs.LookAndFeelTitle,
          EditModeTabs.LookAndFeelSortOrder)]
-    public abstract class ThemedWebPart : ContentItem
+    public abstract class ThemedWebPart : Part
     {
         private string 
             _TemplateUrl, 

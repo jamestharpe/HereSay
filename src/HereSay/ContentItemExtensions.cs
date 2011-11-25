@@ -8,6 +8,11 @@ using System.Web;
 using N2.Edit.Workflow;
 using Rolcore;
 using Rolcore.Web;
+using N2.Engine.Globalization;
+using HereSay.Globalization;
+using N2.Collections;
+using N2;
+using HereSay.Engine;
 
 namespace HereSay
 {
@@ -16,7 +21,7 @@ namespace HereSay
     /// </summary>
     public static class ContentItemExtensions
     {
-        internal static string GetTemplateUrl(this N2.ContentItem item, string templatesRoot, string templateName, string templateFileExtension, string defaultTemplateName)
+        internal static string GetTemplateUrl(this ContentItem item, string templatesRoot, string templateName, string templateFileExtension, string defaultTemplateName)
         {
             string result = templatesRoot + templateName;
 
@@ -30,7 +35,7 @@ namespace HereSay
             return result;
         }
 
-        internal static string[] GetAvailableTemplates(this N2.ContentItem item, string templatesRoot, string templateSearchPatternFormat, string defaultTemplateName)
+        internal static string[] GetAvailableTemplates(this ContentItem item, string templatesRoot, string templateSearchPatternFormat, string defaultTemplateName)
         {
             HttpContext context = HttpContext.Current;
             if (context == null)
@@ -70,12 +75,12 @@ namespace HereSay
             return result;
         }
 
-        public static N2.Web.ISitesSource GetSitesSource(this N2.ContentItem contentItem)
+        public static N2.Web.ISitesSource GetSitesSource(this ContentItem contentItem)
         {
-            if(contentItem == null)
+            if (contentItem == null)
                 return Find.StartPage as N2.Web.ISitesSource;
 
-            N2.ContentItem currentItem = contentItem;
+            ContentItem currentItem = contentItem;
             do
             {
                 N2.Web.ISitesSource result = currentItem as N2.Web.ISitesSource;
@@ -88,6 +93,38 @@ namespace HereSay
             return Find.StartPage as N2.Web.ISitesSource;
         }
 
+        public static IEnumerable<ContentTranslation> GetTranslations(this ContentItem contentItem)
+        {
+            ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
+            using (ItemFilter languageFilter = new CompositeFilter(new AccessFilter(), new PublishedFilter()))
+            {
+                IEnumerable<ContentItem> translationItems = languageGateway.FindTranslations(Context.CurrentPage);
+                foreach (ContentItem translation in languageFilter.Pipe(translationItems))
+                {
+                    ILanguage language = languageGateway.GetLanguage(translation);
+                    // Hide translations when filtered access to their language
+                    ContentItem languageItem = language as ContentItem;
+                    if (languageItem == null || languageFilter.Match(languageItem))
+                        yield return new ContentTranslation(translation, language);
+                }
+            }
+        }
+
+        public static ILanguage GetLanguage(this ContentItem contentItem)
+        {
+            ILanguage result = HttpContext.Current.Items["CurrentLanguage"] as ILanguage;
+            if (result == null)
+            {
+                ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
+                if (languageGateway != null)
+                {
+                    result = languageGateway.GetLanguage(contentItem);
+                    HttpContext.Current.Items["CurrentLanguage"] = result;
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Returns a value specifying a consistent URL for the content item, even if it is not 
         /// published.
@@ -95,7 +132,7 @@ namespace HereSay
         /// <param name="contentItem">Specifies a content item.</param>
         /// <param name="cacheResult">Specifies if the result should be cached in the ASP.NET Cache</param>
         /// <returns>A <see cref="string"/> that represents a URL to the content item.</returns>
-        public static string GetSafeUrl(this N2.ContentItem contentItem, bool cacheResult = true)
+        public static string GetSafeUrl(this ContentItem contentItem, bool cacheResult = true)
         {
             //
             // Pre-conditions
@@ -113,14 +150,14 @@ namespace HereSay
             N2.Web.ISitesSource sitesSource = contentItem.GetSitesSource();
             IEnumerable<N2.Web.Site> sites = (sitesSource != null) ? sitesSource.GetSites() : new List<N2.Web.Site>();
             N2.Web.Site site = sites // Try to match domain, otherwise default to first-available authority
-                .Where(s =>  
+                .Where(s =>
                     s.Authority.Equals(request.Url.Authority, StringComparison.OrdinalIgnoreCase))
                 .FirstOrDefault()
                 ?? sites.FirstOrDefault();
 
             Uri siteBaseUrl = (site != null) // "Safe" URLs are fully qualified
                 ? new Uri(string.Format("{0}{1}{2}", request.Url.Scheme, Uri.SchemeDelimiter, site.Authority))
-                : httpContext.GetSiteBaseUrl(); 
+                : httpContext.GetSiteBaseUrl();
 
             //
             // Check cache
@@ -146,7 +183,7 @@ namespace HereSay
             // Not in cache, calc result
 
             string result;
-            N2.ContentItem safeParent = contentItem.GetSafeParent();
+            ContentItem safeParent = contentItem.GetSafeParent();
             if ((safeParent == null) || (safeParent == Find.RootItem))
                 result = siteBaseUrl.ToString(); // contentItem.Url.ToUri(siteBaseUrl).ToString();
             else
@@ -154,7 +191,7 @@ namespace HereSay
                 StringBuilder resultBuilder = new StringBuilder(safeParent.GetSafeUrl().EnsureTrailing('/') + contentItem.Name);
 
                 if (contentItem.Children.Any(item => item.IsPage))
-                //if (contentItem.GetPublishedChildren<N2.ContentItem>(true).Any(item => item.IsPage))
+                    //if (contentItem.GetPublishedChildren<N2.ContentItem>(true).Any(item => item.IsPage))
                     resultBuilder.Append('/');
 
                 result = resultBuilder.ToString().ToUri(siteBaseUrl).ToString();
@@ -175,31 +212,31 @@ namespace HereSay
         /// <param name="contentItem">Specifies the item.</param>
         /// <returns>The parent of the item, or the parent of the currently published version of 
         /// the item.</returns>
-        public static N2.ContentItem GetSafeParent(this N2.ContentItem contentItem)
+        public static ContentItem GetSafeParent(this ContentItem contentItem)
         {
             return contentItem.Parent ?? ((contentItem.VersionOf == null) ? null : contentItem.VersionOf.Parent);
         }
 
-        public static IEnumerable<TContentItem> GetPublishedSiblings<TContentItem>(this N2.ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
+        public static IEnumerable<TContentItem> GetPublishedSiblings<TContentItem>(this ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
         {
             return Find.PublishedChildren<TContentItem>(
-                contentItem.GetSafeParent(), 
+                contentItem.GetSafeParent(),
                 includeItemsAssignableFromTContentItem);
         }
 
-        public static IEnumerable<TContentItem> GetPublishedChildren<TContentItem>(this N2.ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
-            where TContentItem : N2.ContentItem
+        public static IEnumerable<TContentItem> GetPublishedChildren<TContentItem>(this ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
+            where TContentItem : ContentItem
         {
             return Find.PublishedChildren<TContentItem>(
-                contentItem, 
+                contentItem,
                 includeItemsAssignableFromTContentItem);
         }
 
-        public static IEnumerable<TContentItem> GetPublishedParents<TContentItem>(this N2.ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
-            where TContentItem : N2.ContentItem
+        public static IEnumerable<TContentItem> GetPublishedParents<TContentItem>(this ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
+            where TContentItem : ContentItem
         {
             return Find.PublishedParents<TContentItem>(
-                contentItem, 
+                contentItem,
                 includeItemsAssignableFromTContentItem);
         }
 

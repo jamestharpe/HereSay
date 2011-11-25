@@ -5,6 +5,7 @@ using System.Text;
 using N2.Engine;
 using N2.Engine.Globalization;
 using System.Web;
+using N2;
 
 namespace HereSay.Engine
 {
@@ -13,9 +14,30 @@ namespace HereSay.Engine
     /// </summary>
     public static class IEngineExtensions
     {
-        public static IEnumerable<ILanguage> GetAvailableLanguages(this IEngine engine)
+        /// <summary>
+        /// Get's the current <see cref="ILanguageGateway"/> implementation. The result is cached 
+        /// for the duration of the current request.
+        /// </summary>
+        /// <param name="engine">Specifies the engine managing the language gateway.</param>
+        /// <returns>An <see cref="ILanguageGateway"/>.</returns>
+        public static ILanguageGateway GetLanguageGateway(this IEngine engine)
         {
-            return engine.Resolve<ILanguageGateway>().GetAvailableLanguages();
+            if (engine == null)
+                throw new ArgumentNullException("engine", "engine is null.");
+
+            HttpContext httpContext = HttpContext.Current;
+            ILanguageGateway result = (httpContext != null)
+                ? httpContext.Items["LanguageGateway"] as ILanguageGateway
+                : null;
+
+            if (result == null)
+            {
+                result = Context.Current.Resolve<ILanguageGateway>();
+                if (httpContext != null)
+                    httpContext.Items["LanguageGateway"] = result;
+            }
+
+            return result;
         }
     }
 }
