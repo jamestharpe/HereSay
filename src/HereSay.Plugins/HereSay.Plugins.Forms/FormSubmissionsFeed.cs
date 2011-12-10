@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using HereSay.Pages;
 using System.ServiceModel.Syndication;
-using N2.Collections;
-using N2;
 using HereSay.Details;
+using HereSay.Pages;
+using N2;
+using N2.Collections;
 using N2.Edit.Workflow;
+using N2.Details;
+using System;
 
 namespace HereSay.Plugins.Forms
 {
@@ -55,6 +55,28 @@ namespace HereSay.Plugins.Forms
             set { this.SetDetail<string>("SubmissionsSource", value); }
         }
 
+        [N2.Details.EditableTextBox("Item Title Format", 10, Required = true, RequiredText = "*",
+            HelpText = "The format to use for the article title of each entry in the feed. Use "
+                     + "[@<em>...</em>] to use a submitted value. For example "
+                     + "[@<em>comment_title</em>] would be replaced with the value of the "
+                     + "\"comment_title\" field in the submission.")]
+        public string ItemTitleFormat
+        {
+            get { return this.GetDetail<string>("ItemTitleFormat", string.Empty); }
+            set { this.SetDetail<string>("ItemTitleFormat", value); }
+        }
+
+        [N2.Details.EditableTextBox("Item Content Format", 11, Required = true, RequiredText = "*",
+            HelpText = "The format to use for the content of each entry in the feed. Use "
+                     + "[@<em>...</em>] to use a submitted value. For example "
+                     + "[@<em>comment_message</em>] would be replaced with the value of the "
+                     + "\"comment_message\" field in the submission.")]
+        public string ItemContentFormat
+        {
+            get { return this.GetDetail<string>("ItemContentFormat", string.Empty); }
+            set { this.SetDetail<string>("ItemContentFormat", value); }
+        }
+
         public IEnumerable<FormSubmission> FeedSource
         {
             get
@@ -90,8 +112,19 @@ namespace HereSay.Plugins.Forms
                 List<SyndicationItem> feedItems = new List<SyndicationItem>();
                 foreach (FormSubmission submission in this.FeedSource)
                 {
-                    feedItems.Add(submission.ToSyndicationItem());
+                    SyndicationItem item = submission.ToSyndicationItem(
+                        this.ItemTitleFormat,
+                        this.ItemContentFormat,
+                        FormUtils.VariableFormat);
+                    feedItems.Add(item);
                 }
+                SyndicationFeed result = new SyndicationFeed(
+                    this.Title,
+                    this.Text,
+                    new Uri(this.GetSafeParent().GetSafeUrl()),
+                    feedItems);
+
+                return result;
             }
         }
     }

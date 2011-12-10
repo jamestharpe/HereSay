@@ -8,6 +8,7 @@ namespace HereSay.Plugins.Forms
 {
     public static class FormUtils
     {
+        public const string VariableFormat = "[@{0}]";
         public static NameValueCollection NameValueCollectionFromRequest(HttpRequest request, bool removeAspNetFields = true)
         {
             NameValueCollection formFields = (request.RequestType == "POST")

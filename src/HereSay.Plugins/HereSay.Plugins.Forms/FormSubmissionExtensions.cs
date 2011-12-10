@@ -24,24 +24,24 @@ namespace HereSay.Plugins.Forms
             return result;
         }
 
-        public static SyndicationItem ToSyndicationItem(this FormSubmission submission, string titleFieldName, string displayTemplate, string fieldFormat)
+        public static SyndicationItem ToSyndicationItem(this FormSubmission submission, string titleFieldFormat, string itemContentFormat, string fieldFormat)
         {
             if (submission == null)
 	            throw new ArgumentNullException("submission", "submission is null.");
-            if (String.IsNullOrEmpty(titleFieldName))
-		        throw new ArgumentException("titleFieldName is null or empty.", "titleFieldName");
-            if (String.IsNullOrEmpty(displayTemplate))
+            if (String.IsNullOrEmpty(titleFieldFormat))
+                throw new ArgumentException("titleFieldFormat is null or empty.", "titleFieldFormat");
+            if (String.IsNullOrEmpty(itemContentFormat))
 		        throw new ArgumentException("displayTemplate is null or empty.", "displayTemplate");
             if (String.IsNullOrEmpty(fieldFormat))
 		        throw new ArgumentException("fieldFormat is null or empty.", "fieldFormat");
 
-            FormSubmissionField titleField = submission.Fields
-                .Where(field => 
-                    field.Name == titleFieldName)
-                .SingleOrDefault();
-            string content = displayTemplate.ReplaceVariables(fieldFormat, submission.ToNameValueCollection());
+            NameValueCollection submissionItems = submission.ToNameValueCollection();
+            
+            string title = titleFieldFormat.ReplaceVariables(fieldFormat, submissionItems);
+            string content = itemContentFormat.ReplaceVariables(fieldFormat, submissionItems);
+
             return new SyndicationItem(
-                (titleField != null) ? titleField.Title : string.Empty,
+                title,
                 content, 
                 submission.Page.SafeUrl.ToUri());
         }

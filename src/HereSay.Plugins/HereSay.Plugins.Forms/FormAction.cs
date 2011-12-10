@@ -9,7 +9,7 @@ namespace HereSay.Plugins.Forms
          HelpText = "This value is not shown on the page, it is just here to help you keep organized.")]
     public abstract class FormAction : N2.ContentItem
     {
-        protected Form Form
+        public Form Form
         {
             get { return this.Parent as Form; }
         }

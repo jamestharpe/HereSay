@@ -13,8 +13,6 @@ namespace HereSay.Plugins.Forms
         IconUrl = "~/N2/Resources/icons/email_go.png")]
     public class FormEmailAction : FormAction
     {
-        private const string VariableFormat = "[@{0}]";
-
         #region UI Properties
 
         [N2.Details.Editable("<strong>Variable Replacement</strong>", typeof(Literal), "Text", 0)]
@@ -83,12 +81,12 @@ namespace HereSay.Plugins.Forms
         {
             NameValueCollection requestFields = FormUtils.NameValueCollectionFromRequest(HttpContext.Current.Request);
 
-            string recipientEmail = this.Recipient.ReplaceVariables(VariableFormat, requestFields);
-            string recipientCCEmail = this.RecipientCC.ReplaceVariables(VariableFormat, requestFields);
-            string recipientBCCEmail = this.RecipientBCC.ReplaceVariables(VariableFormat, requestFields);
-            string senderEmail = this.Sender.ReplaceVariables(VariableFormat, requestFields);
-            string subject = this.Subject.ReplaceVariables(VariableFormat, requestFields);
-            string body = this.Message.ReplaceVariables(VariableFormat, requestFields);
+            string recipientEmail = this.Recipient.ReplaceVariables(FormUtils.VariableFormat, requestFields);
+            string recipientCCEmail = this.RecipientCC.ReplaceVariables(FormUtils.VariableFormat, requestFields);
+            string recipientBCCEmail = this.RecipientBCC.ReplaceVariables(FormUtils.VariableFormat, requestFields);
+            string senderEmail = this.Sender.ReplaceVariables(FormUtils.VariableFormat, requestFields);
+            string subject = this.Subject.ReplaceVariables(FormUtils.VariableFormat, requestFields);
+            string body = this.Message.ReplaceVariables(FormUtils.VariableFormat, requestFields);
 
             EmailUtils.SendEmail(
                 EmailUtils.CreateMessage(
