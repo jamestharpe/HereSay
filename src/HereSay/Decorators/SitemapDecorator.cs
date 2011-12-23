@@ -20,7 +20,7 @@ namespace HereSay.Decorators
                 && !typeof(CustomCssContent).IsAssignableFrom(type)
                 && !typeof(CustomJavaScriptContent).IsAssignableFrom(type)
                 && !typeof(RedirectPage).IsAssignableFrom(type)
-                && !typeof(FeedPage).IsAssignableFrom(type)
+                && !typeof(FeedPageBase).IsAssignableFrom(type)
                 && !typeof(WebsiteRoot).IsAssignableFrom(type);
         }
 

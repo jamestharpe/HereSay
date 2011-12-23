@@ -36,7 +36,9 @@ namespace HereSay.Plugins.Forms
         EditModeTabs.FormActionSortOrder),
      N2.Integrity.RestrictParents(typeof(WebPage)),
      N2.Integrity.RestrictChildren(typeof(FormAction), typeof(FormValidator)),
-     N2.Details.WithEditableTitle(Title = "Form Name", ContainerName = EditModeTabs.Content, Required = true,
+     N2.Details.WithEditableTitle(
+         Title = "Form Name", 
+         ContainerName = EditModeTabs.Content, Required = true,
          HelpText = "This value is not shown on the page, it is just here to help you keep organized.")]
     public class Form : N2.ContentItem, N2.Web.Parts.IAddablePart
         //
@@ -118,7 +120,10 @@ namespace HereSay.Plugins.Forms
                 }
                 catch (Exception rootEx)
                 {
-                    //capture any exceptions thrown by the "actions" performed and kick them back to the user
+                    //
+                    // Capture any exceptions thrown by the "actions" performed and kick them back 
+                    // to the user.
+
                     rootEx.ForEachInnerException(exception =>
                     {
                         validationMessageslistBox.Controls.Add(

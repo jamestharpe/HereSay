@@ -6,6 +6,7 @@ using N2;
 using N2.Integrity;
 using System.Collections.Generic;
 using N2.Collections;
+using N2.Details;
 
 namespace HereSay.Plugins.Forms
 {
@@ -13,7 +14,8 @@ namespace HereSay.Plugins.Forms
         Title = "Save as Content",
         Name = "FormContentSaveAction",
         IconUrl = "~/N2/Resources/icons/database_save.png"),
-     RestrictChildren(typeof(FormSubmission))]
+     RestrictChildren(typeof(FormSubmission)),
+     WithEditableName("Name", 20)]
     public class FormContentSaveAction : FormAction, IFormSubmissionsProvider
     {
         public override void DoWork()
