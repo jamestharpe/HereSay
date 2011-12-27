@@ -1,5 +1,5 @@
-﻿
-using HereSay.Pages;
+﻿using HereSay.Pages;
+
 namespace HereSay.Parts
 {
     /// <summary>
@@ -7,6 +7,9 @@ namespace HereSay.Parts
     /// </summary>
     public abstract class Part : N2.ContentItem //TODO: ContentPart
     {
+        /// <summary>
+        /// Forces IsPage to return false.
+        /// </summary>
         public override bool IsPage { get { return false; } }
 
         /// <summary>

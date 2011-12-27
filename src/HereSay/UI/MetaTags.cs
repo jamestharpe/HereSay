@@ -34,7 +34,8 @@ namespace HereSay.UI
             IEnumerable<MetaTag> tags = (new MetaTag[]{
                                             new MetaTag() { TagName = "keywords", Content = page.MetaKeywords },
                                             new MetaTag() { TagName = "description", Content = page.MetaDescription } })
-                                        .Union(page.MetaTagItems);
+                                        .Union(
+                                            page.MetaTagItems);
 
             ContentPlaceHolder container = new ContentPlaceHolder();
             foreach (MetaTag tag in tags)

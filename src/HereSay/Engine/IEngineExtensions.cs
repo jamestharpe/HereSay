@@ -22,13 +22,22 @@ namespace HereSay.Engine
         /// <returns>An <see cref="ILanguageGateway"/>.</returns>
         public static ILanguageGateway GetLanguageGateway(this IEngine engine)
         {
+            //
+            // Pre-conditions
+
             if (engine == null)
                 throw new ArgumentNullException("engine", "engine is null.");
+
+            //
+            // Check context
 
             HttpContext httpContext = HttpContext.Current;
             ILanguageGateway result = (httpContext != null)
                 ? httpContext.Items["LanguageGateway"] as ILanguageGateway
                 : null;
+
+            //
+            // Find, if not cached
 
             if (result == null)
             {

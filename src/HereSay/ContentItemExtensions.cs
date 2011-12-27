@@ -93,6 +93,11 @@ namespace HereSay
             return Find.StartPage as N2.Web.ISitesSource;
         }
 
+        /// <summary>
+        /// Returns the available translations for the specified item.
+        /// </summary>
+        /// <param name="contentItem">Specifies the content item for which to find a translation.</param>
+        /// <returns>Available translations</returns>
         public static IEnumerable<ContentTranslation> GetTranslations(this ContentItem contentItem)
         {
             ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
