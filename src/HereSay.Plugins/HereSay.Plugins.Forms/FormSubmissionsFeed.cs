@@ -11,6 +11,14 @@ using System;
 
 namespace HereSay.Plugins.Forms
 {
+    [N2.PageDefinition(
+        "Form Submission Feed",
+        Name = "FormSubmissionsFeed",
+        SortOrder = PageSorting.RareUse,
+        Description = "Establishes a Feed of a specified type (RSS or ATOM) based on form submissions.",
+        InstallerVisibility = N2.Installation.InstallerHint.NeverRootOrStartPage,
+        TemplateUrl = CustomTextContent.HttpHandlerTemplateUrl,
+        IconUrl = "~/N2/Resources/icons/rss_feed.gif")]
     public class FormSubmissionsFeed : FeedPageBase
     {
         private IEnumerable<IFormSubmissionsProvider> _AvailableSubmissionProviders;
@@ -48,7 +56,7 @@ namespace HereSay.Plugins.Forms
             }
         }
 
-        [EditableDropDownList("Submissions Source", 100, "AvailableSubmissionProviders", "Name", "Name", Required=true)]
+        [EditableDropDownList("Submissions Source", 100, "AvailableSubmissionProviders", "{$Name}", "{$Name}")]
         public string SubmissionsSource
         {
             get { return this.GetDetail<string>("SubmissionsSource", null); }

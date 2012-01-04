@@ -7,6 +7,7 @@ using Rolcore;
 using N2;
 using N2.Web.UI;
 using N2.Details;
+using System.Text;
 
 namespace HereSay.Parts
 {
@@ -88,10 +89,10 @@ namespace HereSay.Parts
 
                 if (_Feed == null && !String.IsNullOrWhiteSpace(feedUrl))
                 {
-                    FeedPage feedPage;
+                    FeedPageBase feedPage;
                     try
                     {
-                        feedPage = Find.ByUrl<FeedPage>(feedUrl);
+                        feedPage = Find.ByUrl<FeedPageBase>(feedUrl);
                     }
                     catch (System.InvalidCastException)
                     {
@@ -151,6 +152,22 @@ namespace HereSay.Parts
 
                 return _Feed;                
             }
+        }
+
+        public string GetSummary(SyndicationItem item)
+        {
+            return (item.Summary != null)
+                ? item.Summary.Text
+                : string.Empty;
+        }
+
+        public string GetContent(SyndicationItem item)
+        {
+            StringBuilder content = new StringBuilder();
+            XmlWriter writer = XmlWriter.Create(content);
+            item.Content.WriteTo(writer, "span", null);
+            writer.Flush();
+            return content.ToString();
         }
     }
 }

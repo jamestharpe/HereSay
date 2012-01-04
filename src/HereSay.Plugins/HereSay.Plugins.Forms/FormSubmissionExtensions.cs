@@ -12,6 +12,12 @@ namespace HereSay.Plugins.Forms
 {
     public static class FormSubmissionExtensions
     {
+        /// <summary>
+        /// Converts the <see cref="FormSubmission"/> into a <see cref="NameValueCollection"/>.
+        /// </summary>
+        /// <param name="submission">Specifies the submission to convert.</param>
+        /// <returns>A <see cref="NameValueCollection"/> containing the same data as the 
+        /// submission.</returns>
         public static NameValueCollection ToNameValueCollection(this FormSubmission submission)
         {
             if (submission == null)

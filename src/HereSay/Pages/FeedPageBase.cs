@@ -14,7 +14,9 @@ namespace HereSay.Pages
     /// <summary>
     /// Base class for creating pages that syndicate content via an XML feed such as RSS or ATOM.
     /// </summary>
-    [TabContainer(
+    [WithEditableTitle("Feed Title", 10, ContainerName = EditModeTabs.PageInformationName, Required = true, RequiredMessage = "Feed Title is required."),
+     WithEditableName("Path Segment", 20, ContainerName = EditModeTabs.PageInformationName, Required = true, RequiredMessage = "Path Segment is required."),
+     TabContainer(
         EditModeTabs.PageInformationName,
         EditModeTabs.PageInformationTitle,
         EditModeTabs.PageInformationSortOrder)]
@@ -145,5 +147,11 @@ namespace HereSay.Pages
             get { return base.Text; }
             set { base.Text = value; }
         }
+
+        /// <summary>
+        /// Gets the description content of the feed. Use the <see cref="Text"/> property for 
+        /// read/write access (this property is here to make finding the description easier).
+        /// </summary>
+        public string Description { get { return this.Text; } }
     }
 }

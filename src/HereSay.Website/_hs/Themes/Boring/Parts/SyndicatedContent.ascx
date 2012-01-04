@@ -6,7 +6,7 @@
         <div>
             <h2><a href="<%: feedItem.Id %>"><%: feedItem.Title.Text%></a></h2>
             <span><%: feedItem.PublishDate.DateTime.ToShortDateString()%></span>
-            <div><%= feedItem.Summary.Text%></div>
+            <div><%= (feedItem.Summary != null) ? feedItem.Summary.Text : this.CurrentItem.GetContent(feedItem)%></div>
         </div>
         <%}
     }
