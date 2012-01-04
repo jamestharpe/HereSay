@@ -61,6 +61,7 @@ namespace HereSay.Plugins.Forms
                 string fieldValue = WebUtils.GetFormControlValueByFormControlId(
                     base.Title, 
                     FormUtils.NameValueCollectionFromRequest(HttpContext.Current.Request));
+                if (fieldValue == null) fieldValue = "";
                 bool doesValueMatch = Regex.IsMatch(fieldValue.Trim(), this.Expression);
                 return this.ReverseMatch ? !doesValueMatch : doesValueMatch;
             }
