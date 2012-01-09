@@ -35,13 +35,13 @@
       <HintPath>..\..\..\lib\N2\N2.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore">
-      <HintPath>..\..\..\lib\Rolcore\Rolcore.dll</HintPath>
+      <HintPath>..\..\packages\Rolcore.0.0.0.1\lib\net40\Rolcore.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Net">
-      <HintPath>..\..\..\lib\Rolcore\Rolcore.Net.dll</HintPath>
+      <HintPath>..\..\packages\Rolcore.0.0.0.1\lib\net40\Rolcore.Net.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Web">
-      <HintPath>..\..\..\lib\Rolcore\Rolcore.Web.dll</HintPath>
+      <HintPath>..\..\packages\Rolcore.0.0.0.1\lib\net40\Rolcore.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
