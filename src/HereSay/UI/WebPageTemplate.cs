@@ -9,9 +9,15 @@ using System.Diagnostics;
 
 namespace HereSay.UI
 {
+    /// <summary>
+    /// Base class for implementing a template for a webpage.
+    /// </summary>
+    /// <typeparam name="TPage">Specifies the type of page for which the instance is a template 
+    /// for.</typeparam>
     public abstract class WebPageTemplate<TPage> : ContentPage<TPage>
         where TPage : N2.ContentItem
     {
+        
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);

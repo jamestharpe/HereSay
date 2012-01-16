@@ -15,7 +15,7 @@ namespace HereSay.Engine
     public static class IEngineExtensions
     {
         /// <summary>
-        /// Get's the current <see cref="ILanguageGateway"/> implementation. The result is cached 
+        /// Gets the current <see cref="ILanguageGateway"/> implementation. The result is cached 
         /// for the duration of the current request.
         /// </summary>
         /// <param name="engine">Specifies the engine managing the language gateway.</param>

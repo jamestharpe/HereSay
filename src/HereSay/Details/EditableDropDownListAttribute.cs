@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using N2.Details;
 using N2.Web.UI.WebControls;
 using Rolcore.Reflection;
+using System;
 
 namespace HereSay.Details
 {
@@ -50,6 +51,11 @@ namespace HereSay.Details
 
         public override void UpdateEditor(N2.ContentItem item, Control editor)
         {
+            if (item == null)
+                throw new ArgumentNullException("item", "item is null.");
+            if (editor == null)
+                throw new ArgumentNullException("editor", "editor is null.");
+
             DropDownList listControl = (DropDownList)editor;
             string defaultValue;
             if (listControl.Items.Count != 0)
@@ -62,6 +68,11 @@ namespace HereSay.Details
 
         public override bool UpdateItem(N2.ContentItem item, Control editor)
         {
+            if (item == null)
+                throw new ArgumentNullException("item", "item is null.");
+            if (editor == null)
+                throw new ArgumentNullException("editor", "editor is null.");
+
             DropDownList listControl = editor as DropDownList;
             item[this.Name] = (listControl.SelectedValue != this.DefaultSelectionText) ? listControl.SelectedValue : null;
             return true;

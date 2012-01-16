@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using N2.Details;
 using N2.Web.UI.WebControls;
 using Rolcore.Reflection;
+using System;
 
 namespace HereSay.Details
 {
@@ -44,6 +45,11 @@ namespace HereSay.Details
 
         public override void UpdateEditor(N2.ContentItem item, Control editor)
         {
+            if (item == null)
+                throw new ArgumentNullException("item", "item is null.");
+            if (editor == null)
+                throw new ArgumentNullException("editor", "editor is null.");
+
             ListBox lb = (ListBox)editor;
             string currentlySelectedItemsString = (string)item[this.Name] ?? string.Empty;
 
@@ -55,7 +61,7 @@ namespace HereSay.Details
                     foreach (string currentItem in currentlySelectedItems)
                     {
                         ListItem listItem = lb.Items.FindByValue(currentItem);
-                        
+
                         if (listItem != null)
                             listItem.Selected = true;
                     }
