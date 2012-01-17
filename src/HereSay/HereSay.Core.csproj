@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HereSayZones.cs" />
+    <Compile Include="HttpContextExtensions.cs" />
     <Compile Include="Pages\FeedPageBase.cs" />
     <Compile Include="Parts\AddablePart.cs" />
     <Compile Include="Parts\Part.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Pages\WebPage.cs" />
     <Compile Include="RequestExtensionMethods.cs" />
     <Compile Include="ConsistentUrlResponseModifier.cs" />
+    <Compile Include="SetCultureResponseModifier.cs" />
     <Compile Include="SyndicationFormat.cs" />
     <Compile Include="UI\Themed\Parts\TemplateBases.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -212,7 +214,6 @@
     <Compile Include="Pages\CustomContent.cs" />
     <Compile Include="Pages\CustomTextContent.cs" />
     <Compile Include="CustomTextItem.cs" />
-    <Compile Include="HttpContextExtensionMethods.cs" />
     <Compile Include="Pages\RedirectPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebsiteRoot.cs" />

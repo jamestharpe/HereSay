@@ -94,5 +94,42 @@ namespace HereSay
 
             return defaultResult;
         }
+
+        /// <summary>
+        /// Sets the current culture based on the subdomain if the current 
+        /// page in the N2 context is null.
+        /// </summary>
+        public static void SetCurrentCulture(this HttpContext httpContext)
+        {
+            string cultureName = string.Empty;
+            // Do I really need this. Can't the culture always be set from the 
+            // subdomain?
+            if (N2.Context.CurrentPage != null)
+            {
+                ILanguageGateway languageGateway = N2.Context.Current.Resolve<ILanguageGateway>();
+                if (languageGateway == null)
+                    return; // Not a multi-language website, nothing to do
+                httpContext.Items["LanguageGateway"] = languageGateway;
+                ILanguage currentLanguage = languageGateway.GetLanguage(N2.Context.CurrentPage);
+                if (currentLanguage == null)
+                    return; // Not a multi-language website, nothing to do
+                httpContext.Items["CurrentLanguage"] = currentLanguage;
+                cultureName = currentLanguage.LanguageCode;
+            }
+
+            if ((httpContext != null) && (httpContext.Request != null) && (httpContext.Request.Url != null))
+            {
+                // Iterate through valid cultures to see if our subdomain is a valid culture name
+                foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.AllCultures))
+                {
+                    if (culture.Name == cultureName)
+                    {
+                        Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName, false);
+                        break;
+                    }
+                }
+            }
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+        }
     }
 }
