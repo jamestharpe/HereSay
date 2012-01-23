@@ -58,9 +58,15 @@ namespace HereSay.Plugins.Forms
         {
             get
             {
+                if(string.IsNullOrEmpty(Title))
+                    throw new InvalidOperationException("Cannot determine IsValid when no Field ID is specified.");
+                if (string.IsNullOrEmpty(Expression))
+                    throw new InvalidOperationException("Cannot determine IsValid when no Expression is specified.");
+
                 string fieldValue = WebUtils.GetFormControlValueByFormControlId(
                     base.Title, 
                     FormUtils.NameValueCollectionFromRequest(HttpContext.Current.Request));
+
                 if (fieldValue == null) fieldValue = "";
                 bool doesValueMatch = Regex.IsMatch(fieldValue.Trim(), this.Expression);
                 return this.ReverseMatch ? !doesValueMatch : doesValueMatch;
