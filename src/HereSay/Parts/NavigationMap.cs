@@ -67,7 +67,7 @@ namespace HereSay.Parts
 
         /// <summary>
         /// The <see cref="NavigationMapItem"/> that links to the page being requested in the 
-        /// current context. If multime items exist, the first one is returned.
+        /// current context. If multiple items exist, the first one is returned.
         /// </summary>
         public NavigationMapItem CurrentMapItem
         {
@@ -97,7 +97,7 @@ namespace HereSay.Parts
                         .FirstOrDefault();
 
                     if (_CurrentMapItem != null)
-                        _CurrentMapItem = _CurrentMapItem.ChildrenThatLinkTo(currentPage).First();
+                        _CurrentMapItem = _CurrentMapItem.ChildrenThatLinkTo(currentPage).FirstOrDefault();
                 }
 
                 return _CurrentMapItem;
