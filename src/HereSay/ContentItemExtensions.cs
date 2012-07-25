@@ -96,7 +96,7 @@ namespace HereSay
         public static IEnumerable<ContentTranslation> GetTranslations(this ContentItem contentItem)
         {
             ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
-            using (ItemFilter languageFilter = new CompositeFilter(new AccessFilter(), new PublishedFilter()))
+            using (ItemFilter languageFilter = new AllFilter(new AccessFilter(), new PublishedFilter()))
             {
                 IEnumerable<ContentItem> translationItems = languageGateway.FindTranslations(Context.CurrentPage);
                 foreach (ContentItem translation in languageFilter.Pipe(translationItems))

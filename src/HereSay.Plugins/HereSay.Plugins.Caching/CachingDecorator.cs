@@ -5,7 +5,7 @@ using System.Web;
 using N2.Definitions;
 using N2.Plugin;
 using HereSay.Definitions;
-using N2.Engine;
+using N2.Web;
 using HereSay;
 
 namespace HereSay.Plugins.Caching
