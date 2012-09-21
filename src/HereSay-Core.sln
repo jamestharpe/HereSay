@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Core", "HereSay\HereSay.Core.csproj", "{2411666C-DD48-463F-8846-7C1544949A33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Website", "HereSay.Website\HereSay.Website.csproj", "{F1772711-5842-4BA1-8AF4-2FB3986137D8}"
