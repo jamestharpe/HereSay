@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using N2.Web.UI;
 using N2.Collections;
 using HereSay.Pages;
+using N2;
 
 namespace HereSay.Decorators
 {
@@ -14,11 +13,16 @@ namespace HereSay.Decorators
     [N2.Engine.Adapts(typeof(WebPage))]
     public class SectionalZoneDecorator : N2.Web.Parts.PartsAdapter
     {
-        public override ItemList GetItemsInZone(N2.ContentItem parentItem, string zoneName)
+        public override IEnumerable<ContentItem> GetParts(N2.ContentItem parentItem, string zoneName, string filteredForInterface)
         {
-            ItemList items = base.GetItemsInZone(parentItem, zoneName);
-            if (zoneName.StartsWith("Sectional") && parentItem != null && parentItem.IsPage)
-                items.AddRange(GetItemsInZone(parentItem.GetSafeParent(), zoneName));
+            IEnumerable<ContentItem> items = base.GetParts(parentItem, zoneName, filteredForInterface);
+            if (zoneName.StartsWith("Sectional") && parentItem != null)
+            {
+                if (parentItem.IsPage)
+                    items = items.Union(GetParts(parentItem.GetSafeParent(), zoneName, filteredForInterface));
+                else
+                    items = items.Union(GetParts(parentItem.VersionOf.Parent, zoneName, filteredForInterface));
+            }
 
             return items;
         }

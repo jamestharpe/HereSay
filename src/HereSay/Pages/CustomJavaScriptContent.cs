@@ -13,6 +13,9 @@ namespace HereSay.Pages
         IconUrl = "~/N2/Resources/icons/script.png")]
     public class CustomJavaScriptContent : CustomTextContent
     {
+        /// <summary>
+        /// Gets a value specifying that the response content type should be text/javascript.
+        /// </summary>
         protected override string ResponseContentType
         {
             get { return ContentTypes.TextJavaScript; }
@@ -26,6 +29,10 @@ namespace HereSay.Pages
             }
         }
 
+        /// <summary>
+        /// Gets and sets the text (script) of the JavaScript. A compressed version of the content 
+        /// is stored in ResponseContentText to reduce bandwidth utilization.
+        /// </summary>
         [N2.Details.EditableTextBox("Script", 200, ContainerName = EditModeTabs.Content, TextMode = TextBoxMode.MultiLine, Rows = 30)]
         public override string Text
         {
@@ -35,7 +42,8 @@ namespace HereSay.Pages
                 base.Text = value;
                 if(!string.IsNullOrWhiteSpace(this.Text))
                 {
-                    string minifiedText = Yahoo.Yui.Compressor.JavaScriptCompressor.Compress(this.Text);
+                    var compressor = new Yahoo.Yui.Compressor.JavaScriptCompressor();
+                    string minifiedText = compressor.Compress(this.Text);
                     this.SetDetail<string>("ResponseContentText", minifiedText);
                 }
             }
