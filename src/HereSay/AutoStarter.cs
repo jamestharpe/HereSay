@@ -43,28 +43,6 @@ namespace HereSay
                 && IsPage(itemType, defaultValue); //TODO: Unit test
         }
 
-        /// <summary>
-        /// Use instead of <see cref="N2.Context.CurrentPage"/> to prevent 
-        /// <see cref="NHibernate.LazyInitializationException"/> from being thrown sporadically.
-        /// </summary>
-        protected static N2.ContentItem GetCurrentPage()
-        {
-            try
-            {
-                return N2.Context.CurrentPage;
-
-                //
-                // For some reason (need to investigate) this occasionally causes a 
-                // NHibernate.LazyInitializationException Exception: "illegal access to loading 
-                // collection". I'm guesing it's because the CurrentPage is still loading and
-                // has not yet been cached by N2.
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public abstract void Start();
         public abstract void Stop();
     }

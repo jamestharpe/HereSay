@@ -14,7 +14,7 @@ namespace HereSay.Pages
         IconUrl = "~/N2/Resources/icons/page_white_text.png")]
     public class CustomContent : CustomTextContent
     {
-        [N2.Details.EditableTextBox("Content Type", 200, ContainerName = EditModeTabs.Content)]
+        [N2.Details.EditableTextBox("Content Type", 200, ContainerName = EditModeTabs.Content, Required=true)]
         public string ContentType
         {
             get { return base.ResponseContentType; }

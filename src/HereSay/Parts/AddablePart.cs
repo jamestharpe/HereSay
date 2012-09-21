@@ -10,7 +10,7 @@ namespace HereSay.Parts
     public abstract class AddablePart : Part, IAddablePart
     {
         /// <summary>
-        /// Override to create the contro which renders the current <see cref="Part"/>.
+        /// Override to create the control which renders the current <see cref="Part"/>.
         /// </summary>
         /// <returns>The <see cref="Control"/> to be rendered.</returns>
         protected abstract Control CreateViewControl();

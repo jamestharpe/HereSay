@@ -7,7 +7,8 @@ namespace HereSay.Parts
     [N2.PartDefinition(
         "HTML (WYSIWYG)",
         IconUrl = "~/N2/Resources/icons/html_go.png"),
-     N2.Details.WithEditableTitle(Title = "Block Name", Required = false, HelpText = "This value is not shown on the page, it is just here to help you keep organized.")]
+     N2.Details.WithEditableTitle(Title = "Block Name", Required = false, HelpText = "This value is not shown on the page, it is just here to help you keep organized."),
+     N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None)]
     public class HtmlContentBlock : HtmlBlock
     {
         [N2.Details.EditableFreeTextArea("Content", 200)]

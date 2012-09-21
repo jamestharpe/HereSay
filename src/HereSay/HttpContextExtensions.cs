@@ -102,9 +102,8 @@ namespace HereSay
         public static void SetCurrentCulture(this HttpContext httpContext)
         {
             string cultureName = string.Empty;
-            // Do I really need this. Can't the culture always be set from the 
-            // subdomain?
-            if (N2.Context.CurrentPage != null)
+
+            if (Find.CurrentPage != null)
             {
                 ILanguageGateway languageGateway = N2.Context.Current.Resolve<ILanguageGateway>();
                 if (languageGateway == null)

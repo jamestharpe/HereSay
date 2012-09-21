@@ -16,7 +16,7 @@ namespace HereSay.Pages
         Description = "Establishes a Syndication Feed of a specified type (RSS or ATOM) based on sibling pages.", 
         InstallerVisibility = N2.Installation.InstallerHint.NeverRootOrStartPage,
         TemplateUrl = CustomTextContent.HttpHandlerTemplateUrl,
-        IconUrl = "~/N2/Resources/icons/rss_feed.gif")]
+        IconUrl = "~/N2/Resources/icons/feed.gif")]
     public class FeedPage : FeedPageBase
     {
         private SyndicationFeed _Feed;

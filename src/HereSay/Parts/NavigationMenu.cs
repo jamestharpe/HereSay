@@ -7,7 +7,8 @@ namespace HereSay.Parts
     [N2.PartDefinition(
         Title = "Navigation Menu",
         IconUrl = "~/N2/Resources/icons/tab.png"),
-     N2.Details.WithEditableTitle(ContainerName=EditModeTabs.LookAndFeelName, SortOrder=0)]
+     N2.Details.WithEditableTitle(ContainerName=EditModeTabs.LookAndFeelName, SortOrder=0),
+     N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None)]
     public class NavigationMenu : ThemedWebPart
     {
         protected NavigationMap _NavigationMap;

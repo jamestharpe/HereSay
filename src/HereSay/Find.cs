@@ -21,6 +21,33 @@ namespace HereSay
             get { return N2.Context.Current.Definitions; }
         }
 
+        /// <summary>
+        /// Use instead of <see cref="N2.Context.CurrentPage"/> to prevent unwanted exceptions.
+        /// Exceptions may be thrown, for example, when a database upgrade is needed and a plug-in 
+        /// is initialized before N2 realizes the upgrade is needed.
+        /// </summary>
+        /// <returns>The current page or NULL if the current page is unavailable for any reason.</returns>
+        public new static ContentItem CurrentPage
+        {
+            get
+            {
+                try
+                {
+                    return Context.Current.UrlParser.CurrentPage;
+
+                    //
+                    // For some reason (need to investigate) this occasionally causes a 
+                    // NHibernate.LazyInitializationException Exception: "illegal access to loading 
+                    // collection". I'm guessing it's because the CurrentPage is still loading and
+                    // has not yet been cached by N2.
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
         public static N2.ContentItem ByUrl(string url)
         {
             if (String.IsNullOrEmpty(url))

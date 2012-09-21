@@ -8,7 +8,8 @@ namespace HereSay.Parts
     [N2.PartDefinition(
         "HTML (Code)",
         IconUrl = "~/N2/Resources/icons/html.png"),
-     N2.Details.WithEditableTitle(Title = "Block Name", Required = false, HelpText = "This value is not shown on the page, it is just here to help you keep organized.")]
+     N2.Details.WithEditableTitle(Title = "Block Name", Required = false, HelpText = "This value is not shown on the page, it is just here to help you keep organized."),
+     N2.Integrity.RestrictChildren(N2.Integrity.AllowedTypes.None)]
     public class HtmlBlock : AddablePart
     {
         protected override System.Web.UI.Control CreateViewControl()

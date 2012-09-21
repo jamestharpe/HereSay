@@ -16,7 +16,7 @@ namespace HereSay.Pages
         SortOrder = PageSorting.RareUse,
         InstallerVisibility = N2.Installation.InstallerHint.NeverRootPage
                             | N2.Installation.InstallerHint.PreferredStartPage),
-     N2.Integrity.RestrictParents(typeof(WebsiteRoot), typeof(HomePage), typeof(WebsiteRoot))]
+     N2.Integrity.RestrictParents(typeof(WebsiteRoot))]
     public class LanguageHomeRedirectPage : RedirectPage
     {
         protected override string GetRedirectUrlPath()

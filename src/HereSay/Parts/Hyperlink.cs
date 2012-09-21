@@ -29,7 +29,7 @@ namespace HereSay.Parts
         }
 
         /// <summary>
-        /// Calcualtes the fully qualified URL if the <see cref="DestinationUrl"/> is relative.
+        /// Calculates the fully qualified URL if the <see cref="DestinationUrl"/> is relative.
         /// </summary>
         protected string QualifiedDestinationUrl
         {
@@ -52,7 +52,7 @@ namespace HereSay.Parts
         }
 
         /// <summary>
-        /// Specifies the page (if availabe) linked to.
+        /// Specifies the page (if available) linked to.
         /// </summary>
         protected N2.ContentItem DestinationWebPage
         {

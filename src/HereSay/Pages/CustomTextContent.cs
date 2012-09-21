@@ -21,8 +21,14 @@ namespace HereSay.Pages
         /// </summary>
         protected virtual string ResponseContentType
         {
-            get { return GetDetail<string>("ContentType", ContentTypes.TextHtml); }
-            set { SetDetail<string>("ContentType", value); }
+            get { return GetDetail<string>("ContentType", ContentTypes.TextPlain); }
+            set 
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    value = ContentTypes.TextPlain;
+
+                SetDetail<string>("ContentType", value); 
+            }
         }
 
         /// <summary>
