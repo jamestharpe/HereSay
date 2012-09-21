@@ -8,7 +8,7 @@ using N2;
 namespace HereSay.Decorators
 {
     /// <summary>
-    /// Implements "Recusive" zones functionality.
+    /// Implements "recursive" zones functionality.
     /// </summary>
     [N2.Engine.Adapts(typeof(WebPage))]
     public class SectionalZoneDecorator : N2.Web.Parts.PartsAdapter
@@ -16,7 +16,7 @@ namespace HereSay.Decorators
         public override IEnumerable<ContentItem> GetParts(N2.ContentItem parentItem, string zoneName, string filteredForInterface)
         {
             IEnumerable<ContentItem> items = base.GetParts(parentItem, zoneName, filteredForInterface);
-            if (zoneName.StartsWith("Sectional") && parentItem != null)
+            if ((zoneName.StartsWith("Sectional") || zoneName.StartsWith("hs_Sectional")) && parentItem != null)
             {
                 if (parentItem.IsPage)
                     items = items.Union(GetParts(parentItem.GetSafeParent(), zoneName, filteredForInterface));

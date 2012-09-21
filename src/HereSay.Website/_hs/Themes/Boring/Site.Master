@@ -3,10 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
     <title><n2:Display runat="server" ID="PageTitleDisplay" PropertyName="PageTitle" /></title>
+
     <HereSay:MetaTags runat="server" ID="MetaTags"/>
     <HereSay:LinkRelCanonical runat="server" ID="LinkRelCanonical" />
+
     <link href="~/_hs/Themes/Boring/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+
+    <n2:Zone runat="server" ID="hs_HeadZone" ZoneName="hs_Head" />
+    <n2:Zone runat="server" ID="hs_SectionalHeadZone" ZoneName="hs_SectionalHead" />
 </head>
 <body>
     <div class="page">

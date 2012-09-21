@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace HereSay.UI
 {
     /// <summary>
-    /// Base class for implementing a template for a webpage.
+    /// Base class for implementing a template for a web page.
     /// </summary>
     /// <typeparam name="TPage">Specifies the type of page for which the instance is a template 
     /// for.</typeparam>

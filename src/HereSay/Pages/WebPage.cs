@@ -194,7 +194,7 @@ namespace HereSay.Pages
         /// <summary>
         /// Gets and sets the value to  be used when a keywords meta tag is rendered.
         /// </summary>
-        [N2.Details.EditableTextBox("Keywords", 20, ContainerName = EditModeTabs.PageInformationName, TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
+        [N2.Details.EditableTextBox("Keywords", 24, ContainerName = EditModeTabs.PageInformationName, TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
         public virtual string MetaKeywords
         {
             get { return (string)(GetDetail("MetaKeywords") ?? string.Empty); }
@@ -211,7 +211,7 @@ namespace HereSay.Pages
             set { SetDetail("MetaDescription", value, string.Empty); }
         }
 
-        [N2.Details.EditableChildren("Meta Tag Items", "MetaTagItems", 100, ContainerName = EditModeTabs.Advanced, ZoneName=HereSayZones.MetaTags)]
+        [N2.Details.EditableChildren("Meta Tag Items", HereSayZones.MetaTags, 26, ContainerName = EditModeTabs.Advanced)]
         public virtual IList<MetaTag> MetaTagItems
         {
             get
@@ -223,6 +223,36 @@ namespace HereSay.Pages
             }
         }
 
+        [N2.Details.EditableChildren("HTML Blocks", HereSayZones.Head, 150, ContainerName = EditModeTabs.Advanced, HelpTitle="HTML Blocks")]
+        public virtual IList<HtmlBlock> HtmlBlocks
+        {
+            get
+            {
+                return new ItemList<HtmlBlock>(
+                    this.Children,
+                    new AccessFilter(),
+                    new ZoneFilter(HereSayZones.Head),
+                    new InverseFilter(new TypeFilter(typeof(HtmlBlock))));
+            }
+        }
+
+        //TODO: Report N2 bug: EditableChildren "Title" does not show in editor
+        //TODO: Report N2 bug: EditableChildren "HelpTitle" does not show in editor
+        //TODO: Report N2 bug: InverseFilter does not inverse the filter
+
+        [N2.Details.EditableChildren("Sectional HTML Blocks", HereSayZones.SectionalHead, 151, ContainerName = EditModeTabs.Advanced, HelpTitle = "Sectional HTML Blocks")]
+        public virtual IList<HtmlBlock> SectionalHtmlBlocks
+        {
+            get
+            {
+
+                return new ItemList<HtmlBlock>(
+                    this.Children,
+                    new AccessFilter(),
+                    new ZoneFilter(HereSayZones.SectionalHead),
+                    new InverseFilter(new TypeFilter(typeof(HtmlBlock))));
+            }
+        }
         #endregion Page Information
     }
 }
