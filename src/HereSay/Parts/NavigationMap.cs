@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HereSay.Pages;
-using System.Diagnostics.Contracts;
+﻿using HereSay.Pages;
 using N2.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HereSay.Parts
 {
