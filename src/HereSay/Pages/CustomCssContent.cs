@@ -37,7 +37,8 @@ namespace HereSay.Pages
                 base.Text = value;
                 if(!string.IsNullOrWhiteSpace(this.Text))
                 {
-                    string minifiedText = Yahoo.Yui.Compressor.CssCompressor.Compress(this.Text);
+                    var compressor = new Yahoo.Yui.Compressor.CssCompressor();
+                    string minifiedText = compressor.Compress(this.Text);
                     this.SetDetail<string>("ResponseContentText", minifiedText);
                 }
             }
