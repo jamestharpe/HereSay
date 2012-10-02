@@ -24,6 +24,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -122,22 +124,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\N2\Remotion.Data.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore, Version=0.0.4627.23434, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Rolcore">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Data, Version=0.0.4627.23435, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore.Data">
-      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Rolcore.Net">
-      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Rolcore.Web, Version=0.0.4627.23434, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Rolcore.Net, Version=0.0.4627.23435, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore.Xml.Linq">
-      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
+    <Reference Include="Rolcore.Web">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Xml.Linq, Version=0.0.4627.23438, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -201,14 +204,6 @@
     <Content Include="N2\N2.zip" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Caching\HereSay.Plugins.Caching.csproj">
-      <Project>{fb7cdff7-75d6-4245-a48a-d9e3fc9bbf17}</Project>
-      <Name>HereSay.Plugins.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Forms\HereSay.Plugins.Forms.csproj">
-      <Project>{5ddd7435-ba81-439b-ba50-4a447cb50eec}</Project>
-      <Name>HereSay.Plugins.Forms</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HereSay\HereSay.Core.csproj">
       <Project>{2411666C-DD48-463F-8846-7C1544949A33}</Project>
       <Name>HereSay.Core</Name>
@@ -236,6 +231,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
