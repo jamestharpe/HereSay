@@ -121,20 +121,25 @@
     <Reference Include="NHibernate">
       <HintPath>..\..\lib\N2\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
+    <Reference Include="Rolcore, Version=0.0.4627.23434, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore.Data">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
+    <Reference Include="Rolcore.Data, Version=0.0.4627.23435, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore.Net">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
+    <Reference Include="Rolcore.Net, Version=0.0.4627.23435, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore.Web">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
+    <Reference Include="Rolcore.Web, Version=0.0.4627.23434, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Rolcore.Xml.Linq">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
+    <Reference Include="Rolcore.Xml.Linq, Version=0.0.4627.23438, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
