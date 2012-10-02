@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{219CF442-1D06-4C2A-975B-2E95EDA7B1DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Core", "..\HereSay\HereSay.Core.csproj", "{2411666C-DD48-463F-8846-7C1544949A33}"
@@ -10,6 +10,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Plugins.Forms", "HereSay.Plugins.Forms\HereSay.Plugins.Forms.csproj", "{5DDD7435-BA81-439B-BA50-4A447CB50EEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereSay.Website", "..\HereSay.Website\HereSay.Website.csproj", "{F1772711-5842-4BA1-8AF4-2FB3986137D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{22E39F08-C99C-4B9D-AD93-146D2A02DCC8}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
