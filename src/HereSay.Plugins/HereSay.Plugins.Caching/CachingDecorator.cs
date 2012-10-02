@@ -22,7 +22,7 @@ namespace HereSay.Plugins.Caching
         /// </summary>
         private static void ApplicationInstance_AcquireRequestState(object sender, EventArgs e)
         {
-            N2.ContentItem page = GetCurrentPage();
+            N2.ContentItem page = Find.CurrentPage;
             
             if (page == null)
                 return;

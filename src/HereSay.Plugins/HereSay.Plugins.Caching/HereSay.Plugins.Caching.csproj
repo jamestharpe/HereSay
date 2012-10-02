@@ -34,6 +34,21 @@
     <Reference Include="N2">
       <HintPath>..\..\..\lib\N2\N2.dll</HintPath>
     </Reference>
+    <Reference Include="Rolcore">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Data">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Net">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Web">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Xml.Linq">
+      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -53,6 +68,9 @@
       <Project>{2411666C-DD48-463F-8846-7C1544949A33}</Project>
       <Name>HereSay.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
