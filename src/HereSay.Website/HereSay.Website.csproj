@@ -122,6 +122,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\N2\Remotion.Data.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Rolcore, Version=0.0.4627.23434, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Data">
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Net">
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Web, Version=0.0.4627.23434, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Xml.Linq">
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -184,6 +201,14 @@
     <Content Include="N2\N2.zip" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Caching\HereSay.Plugins.Caching.csproj">
+      <Project>{fb7cdff7-75d6-4245-a48a-d9e3fc9bbf17}</Project>
+      <Name>HereSay.Plugins.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Forms\HereSay.Plugins.Forms.csproj">
+      <Project>{5ddd7435-ba81-439b-ba50-4a447cb50eec}</Project>
+      <Name>HereSay.Plugins.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HereSay\HereSay.Core.csproj">
       <Project>{2411666C-DD48-463F-8846-7C1544949A33}</Project>
       <Name>HereSay.Core</Name>
@@ -191,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\n2_host.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -203,16 +231,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51972</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
