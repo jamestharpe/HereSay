@@ -204,6 +204,14 @@
     <Content Include="N2\N2.zip" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Caching\HereSay.Plugins.Caching.csproj">
+      <Project>{fb7cdff7-75d6-4245-a48a-d9e3fc9bbf17}</Project>
+      <Name>HereSay.Plugins.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Forms\HereSay.Plugins.Forms.csproj">
+      <Project>{5ddd7435-ba81-439b-ba50-4a447cb50eec}</Project>
+      <Name>HereSay.Plugins.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HereSay\HereSay.Core.csproj">
       <Project>{2411666C-DD48-463F-8846-7C1544949A33}</Project>
       <Name>HereSay.Core</Name>
