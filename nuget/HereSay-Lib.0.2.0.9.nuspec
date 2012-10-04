@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>HereSay-Lib</id>
+        <version>0.2.0.9</version>
+        <title>HereSay Libraries</title>
+        <authors>Rollins,Inc.</authors>
+        <owners />
+        <licenseUrl>https://github.com/jamestharpe/HereSay/blob/master/license.txt</licenseUrl>
+        <projectUrl>https://github.com/jamestharpe/HereSay</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>HereSay is a Content Management System, or CMS, with three objectives: SEO, End-User Simplicity, Extensibility.</description>
+        <summary />
+        <releaseNotes>Baseline CMS, some early plug-ins.</releaseNotes>
+        <tags>CMS, Content Management System</tags>
+        <dependencies>
+            <dependency id="Rolcore" version="0.0.0.12" />
+            <dependency id="YUICompressor.NET" version="2.0.0.0" />
+            <dependency id="EcmaScript.Net" version="1.0.1.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="content\_._" target="content\_._" />
+        <file src="lib\net40\Antlr3.Runtime.dll" target="lib\net40\Antlr3.Runtime.dll" />
+        <file src="lib\net40\Castle.Components.Binder.dll" target="lib\net40\Castle.Components.Binder.dll" />
+        <file src="lib\net40\Castle.Components.Validator.dll" target="lib\net40\Castle.Components.Validator.dll" />
+        <file src="lib\net40\Castle.Core.dll" target="lib\net40\Castle.Core.dll" />
+        <file src="lib\net40\Castle.Services.Transaction.dll" target="lib\net40\Castle.Services.Transaction.dll" />
+        <file src="lib\net40\Castle.Windsor.dll" target="lib\net40\Castle.Windsor.dll" />
+        <file src="lib\net40\HereSay.dll" target="lib\net40\HereSay.dll" />
+        <file src="lib\net40\Iesi.Collections.dll" target="lib\net40\Iesi.Collections.dll" />
+        <file src="lib\net40\Ionic.Zip.dll" target="lib\net40\Ionic.Zip.dll" />
+        <file src="lib\net40\log4net.dll" target="lib\net40\log4net.dll" />
+        <file src="lib\net40\Lucene.Net.dll" target="lib\net40\Lucene.Net.dll" />
+        <file src="lib\net40\N2.dll" target="lib\net40\N2.dll" />
+        <file src="lib\net40\N2.Management.dll" target="lib\net40\N2.Management.dll" />
+        <file src="lib\net40\N2.Packaging.dll" target="lib\net40\N2.Packaging.dll" />
+        <file src="lib\net40\NHibernate.ByteCode.Castle.dll" target="lib\net40\NHibernate.ByteCode.Castle.dll" />
+        <file src="lib\net40\NHibernate.Caches.SysCache2.dll" target="lib\net40\NHibernate.Caches.SysCache2.dll" />
+        <file src="lib\net40\NHibernate.dll" target="lib\net40\NHibernate.dll" />
+        <file src="lib\net40\Remotion.Data.Linq.dll" target="lib\net40\Remotion.Data.Linq.dll" />
+    </files>
+</package>
