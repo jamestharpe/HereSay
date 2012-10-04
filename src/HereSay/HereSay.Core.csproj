@@ -105,14 +105,14 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EcmaScript.NET">
+      <HintPath>..\HereSay.Plugins\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
+    </Reference>
     <Reference Include="N2">
       <HintPath>..\..\lib\N2\N2.dll</HintPath>
     </Reference>
     <Reference Include="N2.Management">
       <HintPath>..\..\lib\N2\N2.Management.dll</HintPath>
-    </Reference>
-    <Reference Include="N2.Security">
-      <HintPath>..\..\lib\N2\N2.Security.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\lib\N2\NHibernate.dll</HintPath>
@@ -158,7 +158,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Yahoo.Yui.Compressor, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\YUICompressor.NET.2.1.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
+      <HintPath>..\HereSay.Plugins\packages\YUICompressor.NET.2.1.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
