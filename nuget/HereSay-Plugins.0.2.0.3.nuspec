@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>HereSay-Plugins</id>
+        <version>0.2.0.3</version>
+        <title>HereSay Plugins</title>
+        <authors>Rollins,Inc.</authors>
+        <owners />
+        <licenseUrl>https://github.com/jamestharpe/HereSay/blob/master/license.txt</licenseUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>HereSay CMS plug-ins.</description>
+        <tags>CMS, Content Management System</tags>
+        <dependencies>
+            <dependency id="HereSay-Lib" version="0.2.0.9" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="lib\net40\HereSay.Plugins.Caching.dll" target="lib\net40\HereSay.Plugins.Caching.dll" />
+        <file src="lib\net40\HereSay.Plugins.Forms.dll" target="lib\net40\HereSay.Plugins.Forms.dll" />
+    </files>
+</package>
