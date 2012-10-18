@@ -71,10 +71,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\N2\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="EcmaScript.NET.modified, Version=0.1.1.0, Culture=neutral, PublicKeyToken=7d53ba4f537753a5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\N2\EcmaScript.NET.modified.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\N2\Iesi.Collections.dll</HintPath>
@@ -103,10 +99,6 @@
     <Reference Include="N2.Packaging, Version=2.2.2.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\N2\N2.Packaging.dll</HintPath>
-    </Reference>
-    <Reference Include="N2.Security, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\N2\N2.Security.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -204,6 +196,14 @@
     <Content Include="N2\N2.zip" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Caching\HereSay.Plugins.Caching.csproj">
+      <Project>{fb7cdff7-75d6-4245-a48a-d9e3fc9bbf17}</Project>
+      <Name>HereSay.Plugins.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HereSay.Plugins\HereSay.Plugins.Forms\HereSay.Plugins.Forms.csproj">
+      <Project>{5ddd7435-ba81-439b-ba50-4a447cb50eec}</Project>
+      <Name>HereSay.Plugins.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HereSay\HereSay.Core.csproj">
       <Project>{2411666C-DD48-463F-8846-7C1544949A33}</Project>
       <Name>HereSay.Core</Name>
