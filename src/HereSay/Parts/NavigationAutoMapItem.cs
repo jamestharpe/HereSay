@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HereSay.Pages;
-using N2.Edit.Workflow;
+using N2;
+using HereSay.Persistence.Finder;
 
 namespace HereSay.Parts
 {
@@ -41,14 +42,15 @@ namespace HereSay.Parts
                         .Where
                             .Parent.Eq(destination)
                         //.And.State.Eq(ContentState.Published)
-                            .And.Published.Le(now)
+                            .And.IsPublished()
                             .And.Type.NotEq(typeof(CustomContent))              // Exclude items
                             .And.Type.NotEq(typeof(CustomCssContent))           // you wouldn't 
                             .And.Type.NotEq(typeof(CustomJavaScriptContent))    // want to link to.
                             .And.Type.NotEq(typeof(CustomTextContent))
                             .And.Type.NotEq(typeof(FeedPage))
                             .And.Type.NotEq(typeof(RedirectPage))
-                        .Select().Where(child => child.IsPage);
+                        .Select()
+                        .Where(child => child.IsPage);
 
                     foreach (N2.ContentItem page in childPages)
                     {

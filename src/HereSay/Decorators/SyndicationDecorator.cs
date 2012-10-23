@@ -58,12 +58,12 @@ namespace HereSay.Decorators
                     EditModeFields.Syndication.ExcludeFromFeedHelpBody);
             });
 
-            Debug.WriteLine("SyndicationDecorator Started");
+            Debug.WriteLine("HereSay: SyndicationDecorator Started");
         }
 
         public override void Stop()
         {
-            Debug.WriteLine("SyndicationDecorator Stopped");
+            Debug.WriteLine("HereSay: SyndicationDecorator Stopped");
         }
     }
 }

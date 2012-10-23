@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using N2;
 using N2.Plugin;
 using N2.Definitions;
 using System.Threading.Tasks;
 using HereSay.Definitions;
 using System.Diagnostics;
 using HereSay.Pages;
+using HereSay.Persistence.Finder;
 
 namespace HereSay.Decorators
 {
@@ -56,7 +58,7 @@ namespace HereSay.Decorators
             persister.ItemDeleted += Persister_SitemapChangeNeeded;
             persister.ItemSaved += Persister_SitemapChangeNeeded;
 
-            Debug.WriteLine("SitemapDecorator Started");
+            Debug.WriteLine("HereSay: SitemapDecorator Started");
         }
 
         static void Persister_SitemapChangeNeeded(object sender, N2.ItemEventArgs e)
@@ -83,7 +85,7 @@ namespace HereSay.Decorators
                     .And.Type.NotEq(typeof(LanguageHomePage))
                     .And.Type.NotEq(typeof(LanguageHomeRedirectPage))
                     .And.Type.NotEq(typeof(RedirectPage))
-                    .And.Published.Le(DateTime.Now)
+                    .And.IsPublished()
                 .Select<N2.ContentItem>();
                 //.Where(item => item.GetType().IsAssignableFrom(typeof(SitemapXml)))
                 //.Cast<SitemapXml>();
@@ -97,7 +99,7 @@ namespace HereSay.Decorators
 
         public override void Stop()
         {
-            Debug.WriteLine("SitemapDecorator Stopped");
+            Debug.WriteLine("HereSay: SitemapDecorator Stopped");
         }
     }
 }

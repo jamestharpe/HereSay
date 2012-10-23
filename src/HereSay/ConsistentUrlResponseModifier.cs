@@ -59,7 +59,7 @@ namespace HereSay
                     int queryStringIndex = rawUrl.IndexOf('?');
                     if (queryStringIndex < 0)
                     {   // Not equal to SafeUrl - redirect
-                        Debug.WriteLine(string.Format("Redirecting {0} to {1}", rawUrl, safeUrl));
+                        Debug.WriteLine(string.Format("HereSay: Redirecting {0} to {1}", rawUrl, safeUrl));
                         response.RedirectPermanent(safeUrl);
                     }
                     else if (queryStringIndex != safeUrl.Length)
@@ -68,11 +68,11 @@ namespace HereSay
                         string 
                             queryString = rawUrl.Substring(queryStringIndex),
                             destination = safeUrl + queryString;
-                        Debug.WriteLine(string.Format("Redirecting {0} to {1}", rawUrl, destination));
+                        Debug.WriteLine(string.Format("HereSay: Redirecting {0} to {1}", rawUrl, destination));
                         response.RedirectPermanent(destination);
                     }
                     else
-                        Debug.WriteLine(string.Format("NOT REDIRECTING {0} to {1}", rawUrl, safeUrl));
+                        Debug.WriteLine(string.Format("HereSay: Not redirecting {0} to {1}", rawUrl, safeUrl));
                 }
             }
         }
@@ -111,12 +111,12 @@ namespace HereSay
 
             EventBroker.Instance.AcquireRequestState += ApplicationInstance_AcquireRequestState;
 
-            Debug.WriteLine("ConsistentUrlResponseModifier Started");
+            Debug.WriteLine("HereSay: ConsistentUrlResponseModifier Started");
         }
 
         public override void Stop()
         {
-            Debug.WriteLine("ConsistentUrlResponseModifier Stopped");
+            Debug.WriteLine("HereSay: ConsistentUrlResponseModifier Stopped");
         }
     }
 }

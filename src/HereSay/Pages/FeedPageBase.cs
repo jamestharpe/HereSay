@@ -80,10 +80,10 @@ namespace HereSay.Pages
         }
 
         /// <summary>
-        /// The <see cref="DateTime?" /> in which this list will begin displaying 
-        /// <see cref="CmsSyndicationFeedPage" /> items. Any items published before this date will 
-        /// not be included in the list, if the date is left blank (or null) it will be as 
-        /// if there is no lower bound specified and all items will be used.
+        /// The <see cref="DateTime?" /> in which this list will begin displaying articles. Any 
+        /// items published before this date will not be included in the list, if the date is left 
+        /// blank (or null) it will be as if there is no lower bound specified and all items will 
+        /// be used.
         /// </summary>
         [EditableDate("Show Only Posts Published After", 80, Name = "StartDateFilter", ShowTime = false, ContainerName = EditModeTabs.Content)]
         public virtual DateTime? StartDateFilter

@@ -8,6 +8,7 @@ using Rolcore;
 using Rolcore.Web;
 using Rolcore.Web.Protocols;
 using HereSay.Decorators;
+using HereSay.Persistence.Finder;
 
 
 namespace HereSay.Pages
@@ -35,16 +36,12 @@ namespace HereSay.Pages
             IEnumerable<N2.ContentItem> pages = Find.Items
                 .Where
                     .Parent.Eq(startItem)
-                    .And.Published.Le(DateTime.Now)
+                    .And.IsPublished()
                     .And.Type.NotEq(typeof(SitemapXml))                 // Minimize selection as
                     .And.Type.NotEq(typeof(CustomCssContent))           // much as possible
                     .And.Type.NotEq(typeof(CustomJavaScriptContent))
                     .And.Type.NotEq(typeof(RedirectPage))
                     .And.Type.NotEq(typeof(FeedPage))
-                    .And.State.NotEq(ContentState.Deleted)
-                    .And.State.NotEq(ContentState.Draft)
-                    .And.State.NotEq(ContentState.New)
-                    .And.State.NotEq(ContentState.Unpublished)
                 //.And.State.Eq(ContentState.Published)
                 .Select()
                     .Where(item =>
