@@ -9,6 +9,11 @@ namespace HereSay.Persistence.Finder
 {
     public static class IQueryBuilderExtensions
     {
+        /// <summary>
+        /// Finds items that are published.
+        /// </summary>
+        /// <param name="queryBuilder">Specifies the query builder.</param>
+        /// <returns></returns>
         public static IQueryAction IsPublished(this IQueryBuilder queryBuilder)
         {
 
