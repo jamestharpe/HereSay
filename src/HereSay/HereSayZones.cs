@@ -7,6 +7,8 @@
     {
         public const string 
             MetaTags = "hs_MetaTags",
+            Head = "hs_Head",
+            SectionalHead = "hs_SectionalHead",
             NavigationMaps = "hs_NavigationMaps",
             Data = "hs_Data";
     }

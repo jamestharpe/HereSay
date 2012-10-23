@@ -20,7 +20,7 @@ namespace HereSay.Parts
         /// <summary>
         /// Gets and sets the HTML to be placed on the page.
         /// </summary>
-        [N2.Details.EditableTextBox("Html", 100, TextMode = TextBoxMode.MultiLine, Rows = 30, Columns = 50)]
+        [N2.Details.EditableTextBox("Html", 100, TextMode = TextBoxMode.MultiLine, Rows = 20, Columns = 50)]
         public virtual string Html
         {
             get { return (string)GetDetail("Html"); }
