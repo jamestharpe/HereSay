@@ -21,12 +21,12 @@ namespace HereSay
         public override void Start()
         {
             EventBroker.Instance.AcquireRequestState += ApplicationInstance_AcquireRequestState;
-            Debug.WriteLine("SetCultureResponseModifier Started");
+            Debug.WriteLine("HereSay: SetCultureResponseModifier Started");
         }
 
         public override void Stop()
         {
-            Debug.WriteLine("SetCultureResponseModifier Stopped");
+            Debug.WriteLine("HereSay: SetCultureResponseModifier Stopped");
         }
     }
 }

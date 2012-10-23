@@ -30,7 +30,8 @@ namespace HereSay
             string fullName = type.FullName;
             engine.Container.AddComponent(fullName, type, type);
 
-            Debug.WriteLine(fullName + " initialized.");
+            Debug.WriteLine(string.Format(
+                "HereSay: {0} initialized.", fullName));
         }
     }
 }

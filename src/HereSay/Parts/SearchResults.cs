@@ -53,16 +53,14 @@ namespace HereSay.Parts
 
                     var itemResults = N2.Find.Items
                         .Where
-                            .MayBePublished()
+                            .IsPublished()
                             .And.OpenBracket()
                                 .Title.Like(like)
                                 .Or.Name.Like(like)
                                 .Or.Detail().Like(like)
                             .CloseBracket()
                             //.And.State.Eq(ContentState.Published)
-                            .And.Expires.IsNull()
-                        .Select()
-                        .Where(item => item.IsPublished());
+                        .Select();
 
                     List<WebPage> result = new List<WebPage>(itemResults.Count());
 

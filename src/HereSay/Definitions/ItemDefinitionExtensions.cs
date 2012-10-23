@@ -42,7 +42,7 @@ namespace HereSay.Definitions
                 tabText,
                 tabSortOrder);
 
-            Debug.WriteLine(string.Format("{0} tab added to {1}", tabText, itemDefinition.Title));
+            Debug.WriteLine(string.Format("HereSay: {0} tab added to {1}", tabText, itemDefinition.Title));
 
             itemDefinition.Add(tab);
         }
@@ -104,7 +104,7 @@ namespace HereSay.Definitions
 
             itemDefinition.Add(result);
 
-            Debug.WriteLine(string.Format("{0} property added to {1}", propertyKey, itemDefinition.Title));
+            Debug.WriteLine(string.Format("HereSay: {0} property added to {1}", propertyKey, itemDefinition.Title));
 
             return result;
         }
@@ -152,7 +152,7 @@ namespace HereSay.Definitions
 
             itemDefinition.Add(result);
 
-            Debug.WriteLine(string.Format("{0} property added to {1}", propertyKey, itemDefinition.Title));
+            Debug.WriteLine(string.Format("HereSay: {0} property added to {1}", propertyKey, itemDefinition.Title));
 
             return result;
         }
@@ -197,7 +197,7 @@ namespace HereSay.Definitions
 
             itemDefinition.Add(result);
 
-            Debug.WriteLine(string.Format("{0} property added to {1}", propertyKey, itemDefinition.Title));
+            Debug.WriteLine(string.Format("HereSay: {0} property added to {1}", propertyKey, itemDefinition.Title));
 
             return result;
         }
@@ -247,7 +247,7 @@ namespace HereSay.Definitions
 
             itemDefinition.Add(result);
 
-            Debug.WriteLine(string.Format("{0} property added to {1}", propertyKey, itemDefinition.Title));
+            Debug.WriteLine(string.Format("HereSay: {0} property added to {1}", propertyKey, itemDefinition.Title));
 
             return result;
         }

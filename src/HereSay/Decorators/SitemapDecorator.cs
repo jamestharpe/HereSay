@@ -58,7 +58,7 @@ namespace HereSay.Decorators
             persister.ItemDeleted += Persister_SitemapChangeNeeded;
             persister.ItemSaved += Persister_SitemapChangeNeeded;
 
-            Debug.WriteLine("SitemapDecorator Started");
+            Debug.WriteLine("HereSay: SitemapDecorator Started");
         }
 
         static void Persister_SitemapChangeNeeded(object sender, N2.ItemEventArgs e)
@@ -85,9 +85,8 @@ namespace HereSay.Decorators
                     .And.Type.NotEq(typeof(LanguageHomePage))
                     .And.Type.NotEq(typeof(LanguageHomeRedirectPage))
                     .And.Type.NotEq(typeof(RedirectPage))
-                    .And.MayBePublished()
-                .Select<N2.ContentItem>()
-                .Where(item => item.IsPublished());
+                    .And.IsPublished()
+                .Select<N2.ContentItem>();
                 //.Where(item => item.GetType().IsAssignableFrom(typeof(SitemapXml)))
                 //.Cast<SitemapXml>();
 
@@ -100,7 +99,7 @@ namespace HereSay.Decorators
 
         public override void Stop()
         {
-            Debug.WriteLine("SitemapDecorator Stopped");
+            Debug.WriteLine("HereSay: SitemapDecorator Stopped");
         }
     }
 }
