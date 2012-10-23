@@ -3,6 +3,8 @@ using HereSay.Parts;
 using System.Linq;
 using N2.Collections;
 using HereSay.Details;
+using System.Diagnostics;
+using System;
 
 namespace HereSay.Pages
 {
@@ -46,7 +48,10 @@ namespace HereSay.Pages
             get
             {
                 if (this._ThemeRoot == null)
+                {
                     _ThemeRoot = string.Format("{0}{1}/", WebsiteRoot.ThemesRoot, this.ThemeName);
+                    Debug.WriteLine(string.Format("Theme Root for {0} ({1}):{2}", this.SafeUrl, this.Name, _ThemeRoot));
+                }
 
                 return this._ThemeRoot;
             }
@@ -169,10 +174,12 @@ namespace HereSay.Pages
                 // default is used, we have to check for this. Not sure how to handle the parent
                 // actually being the desired canonical value.
                 // TODO: Revisit after N2 2.0 upgrade
-                string safeParentUrl = null;
+                string safeParentUrl;
                 WebPage parent = this.GetSafeParent() as WebPage;
                 if (parent != null)
                     safeParentUrl = parent.SafeUrl;
+                else
+                    safeParentUrl = null;
                 if ((value != this.CanonicalUrl) && (value != this.SafeUrl) && (value != safeParentUrl))
                     SetDetail<string>("CanonicalUrl", value);
                 else if (value == this.SafeUrl || value == safeParentUrl) // Case 2984

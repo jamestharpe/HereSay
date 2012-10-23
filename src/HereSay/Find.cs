@@ -7,6 +7,8 @@ using HereSay.Definitions;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using N2;
+using N2.Persistence.Finder;
+using HereSay.Persistence.Finder;
 
 namespace HereSay
 {
@@ -35,9 +37,8 @@ namespace HereSay
                 {
                     return Context.Current.UrlParser.CurrentPage;
 
-                    //
-                    // For some reason (need to investigate) this occasionally causes a 
-                    // NHibernate.LazyInitializationException Exception: "illegal access to loading 
+                    // TODO: For some reason (need to investigate) this occasionally causes an 
+                    // NHibernate.LazyInitializationException Exception: "illegal access to loading
                     // collection". I'm guessing it's because the CurrentPage is still loading and
                     // has not yet been cached by N2.
                 }
@@ -112,8 +113,15 @@ namespace HereSay
                 result = N2.Find.Items
                     .Where
                         .Type.In(types)
-                        .And.State.Eq(ContentState.Published)
-                    .Select().Cast<TContentItem>();
+                        .And.OpenBracket()
+                            // See IsPublished at https://github.com/n2cms/n2cms/blob/master/src/Framework/N2/Utility.cs
+                            .State.Eq(ContentState.New)          // Potentially published
+                            .Or.State.Eq(ContentState.None)      // Potentially published
+                            .Or.State.Eq(ContentState.Published) // Definitely published!
+                        .CloseBracket()
+                    .Select()
+                    .Cast<TContentItem>()
+                    .Where(item => item.IsPublished()); // Safer than State.Eq(ContentState.Published)
             else
                 result = N2.Find.Items
                     .Where
@@ -151,9 +159,10 @@ namespace HereSay
                 IEnumerable<TContentItem> result = Find.Items
                     .Where.Type.In(typeImplementingPages)
                         .And.Parent.Eq(parent)
-                        .And.Published.Le(DateTime.Now)
+                        .And.MayBePublished()
                         //.And.State.Eq(ContentState.Published)
                     .Select()
+                    .Where(item => item.IsPublished())
                     .OrderBy(item => item.SortOrder)
                     .Cast<TContentItem>();
 
@@ -189,7 +198,7 @@ namespace HereSay
             {
                 parentItem = parentItem.GetSafeParent();
                 TContentItem typedParent = parentItem as TContentItem;
-                if (typedParent != null && typedParent.State == ContentState.Published && (includeItemsAssignableFromTContentItem || parentItem.GetType() == typeof(TContentItem)))
+                if (typedParent != null && typedParent.IsPublished() && (includeItemsAssignableFromTContentItem || parentItem.GetType() == typeof(TContentItem)))
                     yield return typedParent;
             } while (parentItem != null);
         }
@@ -213,10 +222,12 @@ namespace HereSay
             {
                 parentItem = parentItem.GetSafeParent();
                 TContentItem typedParent = parentItem as TContentItem;
-                if ((typedParent != null) 
-                    && (parentItem.Published <= DateTime.Now) 
-                    && (parentItem.GetType() == typeof(TContentItem) || includeItemsAssignableFromTContentItem))
+                if ((typedParent != null)
+                 && (parentItem.IsPublished())
+                 && (parentItem.GetType() == typeof(TContentItem) || includeItemsAssignableFromTContentItem))
+                {
                     result = typedParent;
+                }
             } while (parentItem != null);
             return result;
         }

@@ -198,6 +198,7 @@
     <Compile Include="Parts\SearchResults.cs" />
     <Compile Include="Parts\SyndicatedContent.cs" />
     <Compile Include="Parts\ThemedWebPart.cs" />
+    <Compile Include="Persistence\Finder\IQueryBuilderExtensions.cs" />
     <Compile Include="PluginInitializer.cs" />
     <Compile Include="Engine\IEngineExtensions.cs" />
     <Compile Include="Pages\WebPage.cs" />
