@@ -42,7 +42,7 @@ namespace HereSay.Parts
                         .Where
                             .Parent.Eq(destination)
                         //.And.State.Eq(ContentState.Published)
-                            .And.MayBePublished()
+                            .And.IsPublished()
                             .And.Type.NotEq(typeof(CustomContent))              // Exclude items
                             .And.Type.NotEq(typeof(CustomCssContent))           // you wouldn't 
                             .And.Type.NotEq(typeof(CustomJavaScriptContent))    // want to link to.
@@ -50,9 +50,7 @@ namespace HereSay.Parts
                             .And.Type.NotEq(typeof(FeedPage))
                             .And.Type.NotEq(typeof(RedirectPage))
                         .Select()
-                        .Where(child => 
-                            child.IsPage
-                            && child.IsPublished());
+                        .Where(child => child.IsPage);
 
                     foreach (N2.ContentItem page in childPages)
                     {

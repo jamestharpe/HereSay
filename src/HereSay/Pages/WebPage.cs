@@ -50,7 +50,7 @@ namespace HereSay.Pages
                 if (this._ThemeRoot == null)
                 {
                     _ThemeRoot = string.Format("{0}{1}/", WebsiteRoot.ThemesRoot, this.ThemeName);
-                    Debug.WriteLine(string.Format("Theme Root for {0} ({1}):{2}", this.SafeUrl, this.Name, _ThemeRoot));
+                    Debug.WriteLine(string.Format("HereSay: Theme Root for {0} ({1}):{2}", this.SafeUrl, this.Name, _ThemeRoot));
                 }
 
                 return this._ThemeRoot;

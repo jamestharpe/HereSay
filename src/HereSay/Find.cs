@@ -68,7 +68,7 @@ namespace HereSay
             }
             catch (UriFormatException ex) // Cannot parse URL to URI
             {
-                Debug.WriteLine("ByUrl() failed and returned null for " + url);
+                Debug.WriteLine("HereSay: ByUrl() failed and returned null for " + url);
                 Debug.WriteLine(ex);
                 return null;
             }
@@ -76,7 +76,7 @@ namespace HereSay
             {
                 // I have run into this NHibernate exception when doing an import of data. 
                 // For now let's just return null. In the future we might want to handle this differently.
-                Debug.WriteLine("ByUrl() failed and returned null for " + url);
+                Debug.WriteLine("HereSay: ByUrl() failed and returned null for " + url);
                 Debug.WriteLine(ex);
                 return null;
             }
@@ -113,20 +113,15 @@ namespace HereSay
                 result = N2.Find.Items
                     .Where
                         .Type.In(types)
-                        .And.OpenBracket()
-                            // See IsPublished at https://github.com/n2cms/n2cms/blob/master/src/Framework/N2/Utility.cs
-                            .State.Eq(ContentState.New)          // Potentially published
-                            .Or.State.Eq(ContentState.None)      // Potentially published
-                            .Or.State.Eq(ContentState.Published) // Definitely published!
-                        .CloseBracket()
+                        .And.IsPublished()
                     .Select()
-                    .Cast<TContentItem>()
-                    .Where(item => item.IsPublished()); // Safer than State.Eq(ContentState.Published)
+                    .Cast<TContentItem>();
             else
                 result = N2.Find.Items
                     .Where
                         .Type.In(types)
-                     .Select().Cast<TContentItem>();
+                     .Select()
+                     .Cast<TContentItem>();
 
             return result;
         }
@@ -159,20 +154,20 @@ namespace HereSay
                 IEnumerable<TContentItem> result = Find.Items
                     .Where.Type.In(typeImplementingPages)
                         .And.Parent.Eq(parent)
-                        .And.MayBePublished()
+                        .And.IsPublished()
                         //.And.State.Eq(ContentState.Published)
                     .Select()
-                    .Where(item => item.IsPublished())
                     .OrderBy(item => item.SortOrder)
                     .Cast<TContentItem>();
 
                 return result;
             }
+
             return Find.Items
                 .Where
                     .Parent.Eq(parent)
                     .And.Type.Eq(typeof(TContentItem))
-                    .And.State.Eq(ContentState.Published)
+                    .And.IsPublished()
                 .Select()
                 .OrderBy(item => item.SortOrder)
                 .Cast<TContentItem>();
@@ -183,23 +178,34 @@ namespace HereSay
         /// type.
         /// </summary>
         /// <typeparam name="TContentItem">The type of item to return.</typeparam>
-        /// <param name="item">The <see cref="N2.ContentItem"/> from which to retrieve 
+        /// <param name="contentItem">The <see cref="N2.ContentItem"/> from which to retrieve 
         /// parent items.</param>
         /// <param name="includeItemsAssignableFromTContentItem">When true, any parent assignable 
         /// from TContentItem will be returned. When false, only items of the exact specified type
         /// will be returned.</param>
         /// <returns>An <see cref="IEnumerable"/> of <see cref="N2.ContentItem"/> instances which 
         /// are of or assignable from the given type.</returns>
-        public static IEnumerable<TContentItem> PublishedParents<TContentItem>(N2.ContentItem item, bool includeItemsAssignableFromTContentItem)
+        public static IEnumerable<TContentItem> PublishedParents<TContentItem>(N2.ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
             where TContentItem : N2.ContentItem
         {
-            N2.ContentItem parentItem = item;
+            if (contentItem == null)
+                throw new ArgumentNullException("contentItem", "item is null.");
+
+            N2.ContentItem parentItem = contentItem;
             do
             {
                 parentItem = parentItem.GetSafeParent();
                 TContentItem typedParent = parentItem as TContentItem;
-                if (typedParent != null && typedParent.IsPublished() && (includeItemsAssignableFromTContentItem || parentItem.GetType() == typeof(TContentItem)))
+                if (typedParent != null
+                 && typedParent.IsPublished()
+                 && (includeItemsAssignableFromTContentItem || parentItem.GetType() == typeof(TContentItem)))
+                {
+                    Debug.WriteLine(string.Format(
+                        "HereSay: {0} ({1}) is parent of {2} ({3})",
+                        typedParent.Url, typedParent.Name,
+                        contentItem.Url, contentItem.Name));
                     yield return typedParent;
+                }
             } while (parentItem != null);
         }
 
@@ -208,27 +214,15 @@ namespace HereSay
         /// type.
         /// </summary>
         /// <typeparam name="TContentItem">The type of item to return.</typeparam>
-        /// <param name="item">The <see cref="N2.ContentItem"/> from which to receive the parent.</param>
+        /// <param name="contentItem">The <see cref="N2.ContentItem"/> from which to receive the parent.</param>
         /// <param name="includeItemsAssignableFromTContentItem">When true, any parent assignable 
         /// from TContentItem will be returned. When false, only items of the exact specified type
         /// will be returned.</param>
         /// <returns>The <see cref="N2.ContentItem"/> which is or assignable from the given type.</returns>
-        public static TContentItem FirstPublishedParent<TContentItem>(N2.ContentItem item, bool includeItemsAssignableFromTContentItem)
-            where TContentItem : class
+        public static TContentItem FirstPublishedParent<TContentItem>(N2.ContentItem contentItem, bool includeItemsAssignableFromTContentItem)
+            where TContentItem : N2.ContentItem
         {
-            TContentItem result = null;
-            N2.ContentItem parentItem = item;
-            do
-            {
-                parentItem = parentItem.GetSafeParent();
-                TContentItem typedParent = parentItem as TContentItem;
-                if ((typedParent != null)
-                 && (parentItem.IsPublished())
-                 && (parentItem.GetType() == typeof(TContentItem) || includeItemsAssignableFromTContentItem))
-                {
-                    result = typedParent;
-                }
-            } while (parentItem != null);
+            TContentItem result = contentItem.GetPublishedParents<TContentItem>(includeItemsAssignableFromTContentItem).First();
             return result;
         }
     }

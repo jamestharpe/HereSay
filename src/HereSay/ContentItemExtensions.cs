@@ -28,7 +28,7 @@ namespace HereSay
             string templatePath = HttpContext.Current.Server.MapPath(result);
             if (!File.Exists(templatePath))
             {
-                Debug.WriteLine(string.Format("Could not find {0} using default.", result));
+                Debug.WriteLine(string.Format("HereSay: Could not find {0} using default.", result));
                 result = templatesRoot + defaultTemplateName + templateFileExtension;
             }
 

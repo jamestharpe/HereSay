@@ -32,7 +32,7 @@ namespace HereSay.Parts
                     if (page != null)
                     {
                         _ThemeRoot = page.ThemeRoot;
-                        Debug.WriteLine(string.Format("Theme Root for part '{0}': {1}", this.Name, _ThemeRoot));
+                        Debug.WriteLine(string.Format("HereSay: Theme Root for part '{0}': {1}", this.Name, _ThemeRoot));
                     }
                 }
 

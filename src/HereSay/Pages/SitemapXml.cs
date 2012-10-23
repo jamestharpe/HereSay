@@ -36,7 +36,7 @@ namespace HereSay.Pages
             IEnumerable<N2.ContentItem> pages = Find.Items
                 .Where
                     .Parent.Eq(startItem)
-                    .And.MayBePublished()
+                    .And.IsPublished()
                     .And.Type.NotEq(typeof(SitemapXml))                 // Minimize selection as
                     .And.Type.NotEq(typeof(CustomCssContent))           // much as possible
                     .And.Type.NotEq(typeof(CustomJavaScriptContent))
@@ -46,7 +46,6 @@ namespace HereSay.Pages
                 .Select()
                     .Where(item =>
                         item.IsPage
-                        && item.IsPublished()
                         && SitemapDecorator.AutoDefineOnType(item.GetType())
                         && !item.GetDetail<bool>(EditModeFields.Syndication.ExcludeFromSiteMapName, false))
                 .Union(new N2.ContentItem[] { startItem });
