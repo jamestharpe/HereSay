@@ -35,8 +35,14 @@ namespace HereSay
             return result;
         }
 
-        internal static string[] GetAvailableTemplates(this ContentItem item, string templatesRoot, string templateSearchPatternFormat, string defaultTemplateName)
+        internal static string[] GetAvailableTemplates(this ContentItem contentItem, string templatesRoot, string templateSearchPatternFormat, string defaultTemplateName)
         {
+            //
+            // Pre-conditions 
+
+            if (contentItem == null)
+                throw new ArgumentNullException("contentItem", "contentItem is null.");
+
             HttpContext context = HttpContext.Current;
             if (context == null)
                 throw new InvalidOperationException("HttpContext is not available, but is required.");
@@ -46,7 +52,7 @@ namespace HereSay
                 throw new InstallationException(templatesRoot
                     + " does not contain any templates.");
 
-            string typeName = item.GetType().Name;
+            string typeName = contentItem.GetType().Name;
             string searchPattern = string.Format(templateSearchPatternFormat, typeName);
             FileInfo[] templateFiles = pageTemplatesDirectory.GetFiles(searchPattern);
 
@@ -75,15 +81,21 @@ namespace HereSay
             return result;
         }
 
+        /// <summary>
+        /// Gets the site source for the specified <see cref="ContentItem"/>.
+        /// <seealso cref="N2.Web.ISitesSource"/>
+        /// </summary>
+        /// <param name="contentItem">Specifies the content item.</param>
+        /// <returns></returns>
         public static N2.Web.ISitesSource GetSitesSource(this ContentItem contentItem)
         {
             if (contentItem == null)
                 return Find.StartPage as N2.Web.ISitesSource;
 
-            ContentItem currentItem = contentItem;
+            var currentItem = contentItem;
             do
             {
-                N2.Web.ISitesSource result = currentItem as N2.Web.ISitesSource;
+                var result = currentItem as N2.Web.ISitesSource;
                 if (result != null)
                     return result;
 
@@ -100,15 +112,24 @@ namespace HereSay
         /// <returns>Available translations</returns>
         public static IEnumerable<ContentTranslation> GetTranslations(this ContentItem contentItem)
         {
-            ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
-            using (ItemFilter languageFilter = new AllFilter(new AccessFilter(), new PublishedFilter()))
+            //
+            // Pre-conditions 
+
+            if (contentItem == null)
+                throw new ArgumentNullException("contentItem", "contentItem is null.");
+
+            var languageGateway = N2.Context.Current.GetLanguageGateway();
+            using (var languageFilter = new AllFilter(new AccessFilter(), new PublishedFilter()))
             {
-                IEnumerable<ContentItem> translationItems = languageGateway.FindTranslations(Context.CurrentPage);
-                foreach (ContentItem translation in languageFilter.Pipe(translationItems))
+                var translationItems = languageGateway.FindTranslations(Context.CurrentPage);
+                foreach (var translation in languageFilter.Pipe(translationItems))
                 {
-                    ILanguage language = languageGateway.GetLanguage(translation);
+                    var language = languageGateway.GetLanguage(translation);
+
+                    //
                     // Hide translations when filtered access to their language
-                    ContentItem languageItem = language as ContentItem;
+
+                    var languageItem = language as ContentItem;
                     if (languageItem == null || languageFilter.Match(languageItem))
                         yield return new ContentTranslation(translation, language);
                 }
@@ -117,16 +138,33 @@ namespace HereSay
 
         public static ILanguage GetLanguage(this ContentItem contentItem)
         {
+            //
+            // Pre-conditions
+
+            if (contentItem == null)
+                throw new ArgumentNullException("contentItem", "contentItem is null.");
+
+            //
+            // Check request-level cache
+
             ILanguage result = HttpContext.Current.Items["CurrentLanguage"] as ILanguage;
             if (result == null)
             {
+                //
+                // Not in cache, get from context
+
                 ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
                 if (languageGateway != null)
                 {
                     result = languageGateway.GetLanguage(contentItem);
+
+                    //
+                    // Cache
+
                     HttpContext.Current.Items["CurrentLanguage"] = result;
                 }
             }
+
             return result;
         }
 

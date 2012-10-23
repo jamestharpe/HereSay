@@ -1,6 +1,7 @@
 ﻿using N2.Edit.Workflow;
 using HereSay.Pages;
 using N2;
+using System.Diagnostics;
 
 namespace HereSay.Parts
 {
@@ -27,9 +28,12 @@ namespace HereSay.Parts
             {
                 if (this._ThemeRoot == null)
                 {
-                    WebPage page = Find.FirstPublishedParent<WebPage>(this, true);
+                    var page = Find.FirstPublishedParent<WebPage>(this, true);
                     if (page != null)
+                    {
                         _ThemeRoot = page.ThemeRoot;
+                        Debug.WriteLine(string.Format("Theme Root for part '{0}': {1}", this.Name, _ThemeRoot));
+                    }
                 }
 
                 return this._ThemeRoot;

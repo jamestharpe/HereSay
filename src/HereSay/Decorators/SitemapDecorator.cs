@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using N2;
 using N2.Plugin;
 using N2.Definitions;
 using System.Threading.Tasks;
 using HereSay.Definitions;
 using System.Diagnostics;
 using HereSay.Pages;
+using HereSay.Persistence.Finder;
 
 namespace HereSay.Decorators
 {
@@ -83,8 +85,9 @@ namespace HereSay.Decorators
                     .And.Type.NotEq(typeof(LanguageHomePage))
                     .And.Type.NotEq(typeof(LanguageHomeRedirectPage))
                     .And.Type.NotEq(typeof(RedirectPage))
-                    .And.Published.Le(DateTime.Now)
-                .Select<N2.ContentItem>();
+                    .And.MayBePublished()
+                .Select<N2.ContentItem>()
+                .Where(item => item.IsPublished());
                 //.Where(item => item.GetType().IsAssignableFrom(typeof(SitemapXml)))
                 //.Cast<SitemapXml>();
 

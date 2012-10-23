@@ -3,6 +3,7 @@ using System.Linq;
 using N2.Edit.Workflow;
 using HereSay.Pages;
 using N2;
+using HereSay.Persistence.Finder;
 namespace HereSay.Parts
 {
     [N2.PartDefinition(
@@ -50,18 +51,20 @@ namespace HereSay.Parts
                 {
                     string like = string.Format("%{0}%", this._LastSearchText);
 
-                    IList<N2.ContentItem> itemResults = N2.Find.Items
+                    var itemResults = N2.Find.Items
                         .Where
-                            .OpenBracket()
+                            .MayBePublished()
+                            .And.OpenBracket()
                                 .Title.Like(like)
                                 .Or.Name.Like(like)
                                 .Or.Detail().Like(like)
                             .CloseBracket()
-                            .And.State.Eq(ContentState.Published)
+                            //.And.State.Eq(ContentState.Published)
                             .And.Expires.IsNull()
-                        .Select();
+                        .Select()
+                        .Where(item => item.IsPublished());
 
-                    List<WebPage> result = new List<WebPage>(itemResults.Count);
+                    List<WebPage> result = new List<WebPage>(itemResults.Count());
 
                     //Need to get the LanguageCode (if it exists) so the results can be filtered
                     IEnumerable<LanguageHomePage> langHomePages = this.GetPublishedParents<LanguageHomePage>(true);
