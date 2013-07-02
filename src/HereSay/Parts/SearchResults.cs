@@ -78,7 +78,7 @@ namespace HereSay.Parts
 
                         if (siteContainsLanguageUrls)
                         {
-                            if (page != null && !result.Contains(page) && page.SafeUrl.Contains(languageCode))
+                            if (page != null && !result.Contains(page) && page.AncestralTrail.Contains(Find.StartPage.ID.ToString()))
                                 result.Add(page);
                         }
                         else
