@@ -10,6 +10,7 @@ using N2.Web;
 using N2.Plugin;
 using Rolcore;
 using Rolcore.Web;
+using N2.Engine;
 
 namespace HereSay
 {
@@ -17,11 +18,20 @@ namespace HereSay
     /// A HereSay <see cref="AutoStarter"/> that automatically redirects requests to a consistent 
     /// URL. This helps to prevent "duplicate" content in Google and other search engines.
     /// </summary>
-    [AutoInitialize]
+
+    [Service, AutoInitialize]
     public class ConsistentUrlResponseModifier : AutoStarter
     {
         private const string DisabledPropertyName = "ConsistentUrlResponseModifier.Disabled";
         private const bool DisabledDefaultValue = false;
+
+        private readonly IDefinitionManager definitions;
+
+        public ConsistentUrlResponseModifier() { }
+        public ConsistentUrlResponseModifier(IDefinitionManager definitions)
+        {
+            this.definitions = definitions;
+        }
 
         /// <summary>
         /// Forces the correct "safe" URL.
@@ -79,7 +89,7 @@ namespace HereSay
 
         public override void Start()
         {
-            IEnumerable<ItemDefinition> homePageDefinitions = this.Definitions
+            IEnumerable<ItemDefinition> homePageDefinitions = this.definitions.GetDefinitions()
                .Where(definition =>
                    IsPage(definition.ItemType)
                 && (typeof(Pages.HomePage).IsAssignableFrom(definition.ItemType)));

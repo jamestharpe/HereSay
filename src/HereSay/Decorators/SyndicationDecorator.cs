@@ -11,20 +11,29 @@ using N2.Web.UI;
 using Rolcore.Reflection;
 using HereSay.Definitions;
 using HereSay.Pages;
+using N2.Engine;
 
 namespace HereSay.Decorators
 {
     /// <summary>
     /// Decorates pages within N2 with properties to manage syndication.
     /// </summary>
-    [AutoInitialize]
+
+    [Service, AutoInitialize]
     public class SyndicationDecorator : AutoStarter
     {
+        private readonly IDefinitionManager definitions;
+
+        public SyndicationDecorator() { }
+        public SyndicationDecorator(IDefinitionManager definitions)
+        {
+            this.definitions = definitions;
+        }
 
         public override void Start()
         {
             //add the Syndication tab as a new "WebPage" definition
-            IEnumerable<ItemDefinition> definitions = this.Definitions
+            IEnumerable<ItemDefinition> definitions = this.definitions.GetDefinitions()
                 .Where(definition => 
                     IsPage(definition.ItemType)
                  && definition.ItemType.IsAssignableFrom(typeof(WebPage)));
