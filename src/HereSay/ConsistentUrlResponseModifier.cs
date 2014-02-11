@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.Web;
 using HereSay.Definitions;
 using N2.Definitions;
-using N2.Web;
 using N2.Plugin;
+using N2.Web;
 using Rolcore;
 using Rolcore.Web;
 
@@ -28,35 +28,35 @@ namespace HereSay
         /// </summary>
         private static void ApplicationInstance_AcquireRequestState(object sender, EventArgs e)
         {
-            N2.ContentItem page = Find.CurrentPage;
+            var page = Find.CurrentPage;
 
             if ((page != null) && (page.IsPage))
             {
-                //
                 // Check that this feature is enabled
 
-                N2.ContentItem home = page.GetPublishedParents<Pages.HomePage>(true).FirstOrDefault();
+                var home = page.GetPublishedParents<Pages.HomePage>(true).FirstOrDefault();
 
                 bool enabled = (home != null)
                     ? ! home.GetDetail<bool>(DisabledPropertyName, DisabledDefaultValue)
                     : true;
 
                 if (!enabled)
+                {
                     return;
+                }
 
-                //
                 // Feature is enabled, redirect to safe URL if necessary
 
-                HttpContext httpContext = HttpContext.Current;
-                Uri siteBaseUrl = httpContext.GetSiteBaseUrl();
+                var httpContext = HttpContext.Current;
+                var siteBaseUrl = httpContext.GetSiteBaseUrl();
                 string
                     rawUrl = httpContext.Request.RawUrl.ToUri(siteBaseUrl).ToString(), //TODO: Strip out page parameter
                     safeUrl = page.GetSafeUrl();
 
                 if (!rawUrl.Equals(safeUrl, StringComparison.InvariantCulture))
                 {
-                    HttpResponse response = ((HttpApplication)sender).Response;
-                    int queryStringIndex = rawUrl.IndexOf('?');
+                    var response = ((HttpApplication)sender).Response;
+                    var queryStringIndex = rawUrl.IndexOf('?');
                     if (queryStringIndex < 0)
                     {   // Not equal to SafeUrl - redirect
                         Debug.WriteLine(string.Format("HereSay: Redirecting {0} to {1}", rawUrl, safeUrl));
@@ -65,14 +65,16 @@ namespace HereSay
                     else if (queryStringIndex != safeUrl.Length)
                     {
                         // There was a query string - this could have caused the difference
-                        string 
+                        string
                             queryString = rawUrl.Substring(queryStringIndex),
                             destination = safeUrl + queryString;
                         Debug.WriteLine(string.Format("HereSay: Redirecting {0} to {1}", rawUrl, destination));
                         response.RedirectPermanent(destination);
                     }
                     else
+                    {
                         Debug.WriteLine(string.Format("HereSay: Not redirecting {0} to {1}", rawUrl, safeUrl));
+                    }
                 }
             }
         }

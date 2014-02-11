@@ -181,31 +181,36 @@ namespace HereSay
             // Pre-conditions
 
             if (contentItem == null)
+            {
                 return string.Empty;
+            }
+
             if (!contentItem.IsPage || contentItem.State == ContentState.None)
+            {
                 return contentItem.Url;
+            }
 
             //
             // Determine base-url/authority from sites source and requested URL.
 
-            HttpContext httpContext = HttpContext.Current;
-            HttpRequest request = httpContext.Request;
-            N2.Web.ISitesSource sitesSource = contentItem.GetSitesSource();
-            IEnumerable<N2.Web.Site> sites = (sitesSource != null) ? sitesSource.GetSites() : new List<N2.Web.Site>();
-            N2.Web.Site site = sites // Try to match domain, otherwise default to first-available authority
+            var httpContext = HttpContext.Current;
+            var request = httpContext.Request;
+            var sitesSource = contentItem.GetSitesSource();
+            var sites = (sitesSource != null) ? sitesSource.GetSites() : new List<N2.Web.Site>();
+            var site = sites // Try to match domain, otherwise default to first-available authority
                 .Where(s =>
                     s.Authority.Equals(request.Url.Authority, StringComparison.OrdinalIgnoreCase))
                 .FirstOrDefault()
                 ?? sites.FirstOrDefault();
 
-            Uri siteBaseUrl = (site != null) // "Safe" URLs are fully qualified
+            var siteBaseUrl = (site != null) // "Safe" URLs are fully qualified
                 ? new Uri(string.Format("{0}{1}{2}", request.Url.Scheme, Uri.SchemeDelimiter, site.Authority))
                 : httpContext.GetSiteBaseUrl();
 
             //
             // Check cache
 
-            System.Web.Caching.Cache cache = httpContext.Cache;
+            var cache = httpContext.Cache;
             cacheResult = cacheResult && cache != null;
             string cacheKey = null;
 
@@ -226,12 +231,14 @@ namespace HereSay
             // Not in cache, calc result
 
             string result;
-            ContentItem safeParent = contentItem.GetSafeParent();
+            var safeParent = contentItem.GetSafeParent();
             if ((safeParent == null) || (safeParent == Find.RootItem))
+            {
                 result = siteBaseUrl.ToString(); // contentItem.Url.ToUri(siteBaseUrl).ToString();
+            }
             else
             {
-                StringBuilder resultBuilder = new StringBuilder(safeParent.GetSafeUrl().EnsureTrailing('/') + contentItem.Name);
+                var resultBuilder = new StringBuilder(safeParent.GetSafeUrl().EnsureTrailing('/') + contentItem.Name);
 
                 if (contentItem.Children.Any(item => item.IsPage))
                     //if (contentItem.GetPublishedChildren<N2.ContentItem>(true).Any(item => item.IsPage))
@@ -244,7 +251,9 @@ namespace HereSay
             // Cache result
 
             if (cacheResult)
+            {
                 cache[cacheKey] = result;
+            }
 
             return result;
         }
