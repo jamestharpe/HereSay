@@ -4,6 +4,7 @@ using N2.Edit.Workflow;
 using HereSay.Pages;
 using N2;
 using HereSay.Persistence.Finder;
+using System;
 namespace HereSay.Parts
 {
     [N2.PartDefinition(
@@ -49,7 +50,7 @@ namespace HereSay.Parts
 
                 if (!string.IsNullOrEmpty(this._LastSearchText))
                 {
-                    string like = string.Format("%{0}%", this._LastSearchText);
+                    string like = string.Format("% {0} %", this._LastSearchText);
 
                     var itemResults = N2.Find.Items
                         .Where
@@ -78,7 +79,9 @@ namespace HereSay.Parts
 
                         if (siteContainsLanguageUrls)
                         {
-                            if (page != null && !result.Contains(page) && page.SafeUrl.Contains(languageCode))
+                            if (page != null && 
+                                !result.Contains(page) && 
+                                item.GetLanguage().LanguageCode.Equals(languageCode, StringComparison.InvariantCultureIgnoreCase))
                                 result.Add(page);
                         }
                         else
