@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using N2;
-using N2.Plugin;
-using N2.Definitions;
 using System.Threading.Tasks;
 using HereSay.Definitions;
-using System.Diagnostics;
 using HereSay.Pages;
 using HereSay.Persistence.Finder;
+using N2.Definitions;
+using N2.Engine;
+using N2.Plugin;
+using N2.Persistence;
 
 namespace HereSay.Decorators
 {
-    [AutoInitialize]
+
+    [Service, AutoInitialize]
     public class SitemapDecorator : AutoStarter
     {
+        private readonly IDefinitionManager definitions;
+        private readonly IPersister persister;
+        
+        public SitemapDecorator() { }
+        public SitemapDecorator(IDefinitionManager definitions, IPersister persister)
+        {
+            this.definitions = definitions;
+            this.persister = persister;
+        }
+
         public static bool AutoDefineOnType(Type type)
         {
             return !typeof(SitemapXml).IsAssignableFrom(type)
@@ -28,8 +39,8 @@ namespace HereSay.Decorators
 
         public override void Start()
         {
-            //add the Syndication tab as a new "WebPage" definition
-            IEnumerable<ItemDefinition> definitions = this.Definitions
+            // add the Syndication tab as a new "WebPage" definition
+            IEnumerable<ItemDefinition> definitions = this.definitions.GetDefinitions()
                 .Where(definition =>
                        IsPage(definition.ItemType)
                     && AutoDefineOnType(definition.ItemType));
@@ -51,8 +62,6 @@ namespace HereSay.Decorators
                     false);
             });
 
-            N2.Persistence.IPersister persister = N2.Context.Persister;
-
             persister.ItemCopied += Persister_SitemapChangeNeeded;
             persister.ItemMoved += Persister_SitemapChangeNeeded;
             persister.ItemDeleted += Persister_SitemapChangeNeeded;
@@ -64,8 +73,8 @@ namespace HereSay.Decorators
         static void Persister_SitemapChangeNeeded(object sender, N2.ItemEventArgs e)
         {
             DateTime published = e.AffectedItem.Published.GetValueOrDefault(DateTime.MaxValue);
-            bool ignoreChange = 
-                published > DateTime.Now || 
+            bool ignoreChange =
+                published > DateTime.Now ||
                 !e.AffectedItem.IsPage ||
                 !AutoDefineOnType(e.AffectedItem.GetType());
 
@@ -87,12 +96,12 @@ namespace HereSay.Decorators
                     .And.Type.NotEq(typeof(RedirectPage))
                     .And.IsPublished()
                 .Select<N2.ContentItem>();
-                //.Where(item => item.GetType().IsAssignableFrom(typeof(SitemapXml)))
-                //.Cast<SitemapXml>();
+            //.Where(item => item.GetType().IsAssignableFrom(typeof(SitemapXml)))
+            //.Cast<SitemapXml>();
 
             foreach (N2.ContentItem sitemap in sitemaps)
             {
-                if(sitemap is SitemapXml)
+                if (sitemap is SitemapXml)
                     ((SitemapXml)sitemap).Regenerate(Find.StartPage);
             }
         }

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HereSay</RootNamespace>
     <AssemblyName>HereSay</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -70,6 +70,7 @@
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -103,34 +104,41 @@
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EcmaScript.NET">
       <HintPath>..\HereSay.Plugins\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
     </Reference>
-    <Reference Include="N2">
-      <HintPath>..\..\lib\N2\N2.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="N2.Management">
-      <HintPath>..\..\lib\N2\N2.Management.dll</HintPath>
+    <Reference Include="N2, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\N2CMS.Library.2.5.0.1\lib\N2.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\..\lib\N2\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HereSay.Plugins\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.dll</HintPath>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.4988.19960\lib\net45\Rolcore.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Data">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Data.dll</HintPath>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.4988.19960\lib\net45\Rolcore.Data.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Net">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Net.dll</HintPath>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.4988.19960\lib\net45\Rolcore.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Rolcore.Repository">
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.4988.19960\lib\net45\Rolcore.Repository.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Web">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Web.dll</HintPath>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.4988.19960\lib\net45\Rolcore.Web.dll</HintPath>
     </Reference>
     <Reference Include="Rolcore.Xml.Linq">
-      <HintPath>..\packages\Rolcore.0.0.0.12\lib\net40\Rolcore.Xml.Linq.dll</HintPath>
+      <HintPath>..\HereSay.Plugins\packages\Rolcore.0.0.4988.19960\lib\net45\Rolcore.Xml.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -156,9 +164,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Yahoo.Yui.Compressor, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HereSay.Plugins\packages\YUICompressor.NET.2.1.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
+    <Reference Include="Yahoo.Yui.Compressor">
+      <HintPath>..\HereSay.Plugins\packages\YUICompressor.NET.2.3.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +256,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
