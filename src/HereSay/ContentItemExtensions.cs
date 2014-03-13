@@ -136,7 +136,7 @@ namespace HereSay
             }
         }
 
-        public static ILanguage GetLanguage(this ContentItem contentItem)
+        public static ILanguage GetLanguage(this ContentItem contentItem, bool fromCache = true)
         {
             //
             // Pre-conditions
@@ -147,7 +147,12 @@ namespace HereSay
             //
             // Check request-level cache
 
-            ILanguage result = HttpContext.Current.Items["CurrentLanguage"] as ILanguage;
+            ILanguage result = null;
+            if (fromCache)
+            {
+                result = HttpContext.Current.Items["CurrentLanguage"] as ILanguage;
+            }
+
             if (result == null)
             {
                 //
@@ -164,6 +169,7 @@ namespace HereSay
                     HttpContext.Current.Items["CurrentLanguage"] = result;
                 }
             }
+
 
             return result;
         }
