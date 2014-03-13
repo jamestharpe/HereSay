@@ -20,7 +20,7 @@ namespace HereSay
         InstallerVisibility = N2.Installation.InstallerHint.PreferredRootPage | N2.Installation.InstallerHint.NeverStartPage,
         IconUrl = "~/N2/Resources/icons/page_gear.png"),
      N2.Integrity.RestrictParents(N2.Integrity.AllowedTypes.None),
-     N2.Integrity.RestrictChildren(typeof(HomePage), typeof(LanguageHomeRedirectPage), typeof(N2.Edit.Trash.ITrashCan), typeof(N2.Security.Items.UserList))]
+     N2.Integrity.RestrictChildren(typeof(HomePage), typeof(LanguageHomeRedirectPage), typeof(N2.Edit.Trash.ITrashCan))]
     public class WebsiteRoot : N2.ContentItem
     {
         public const string InstallRoot = "~/_hs/";

@@ -81,7 +81,7 @@ namespace HereSay.Parts
                         {
                             if (page != null && 
                                 !result.Contains(page) && 
-                                item.GetLanguage().LanguageCode.Equals(languageCode, StringComparison.InvariantCultureIgnoreCase))
+                                item.GetLanguage(false).LanguageCode.Equals(languageCode, StringComparison.InvariantCultureIgnoreCase))
                                 result.Add(page);
                         }
                         else

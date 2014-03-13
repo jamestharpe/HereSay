@@ -136,7 +136,7 @@ namespace HereSay
             }
         }
 
-        public static ILanguage GetLanguage(this ContentItem contentItem)
+        public static ILanguage GetLanguage(this ContentItem contentItem, bool fromCache = true)
         {
             //
             // Pre-conditions
@@ -145,15 +145,31 @@ namespace HereSay
                 throw new ArgumentNullException("contentItem", "contentItem is null.");
 
             //
-            // Use the Current N2 Context to Get the LanguageGateway. This allows you to
-            // Query the language of a specific content item.
-            
+            // Check request-level cache
+
             ILanguage result = null;
-            ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
-            if (languageGateway != null)
+            if (fromCache)
             {
-                result = languageGateway.GetLanguage(contentItem);
+                result = HttpContext.Current.Items["CurrentLanguage"] as ILanguage;
             }
+
+            if (result == null)
+            {
+                //
+                // Not in cache, get from context
+
+                ILanguageGateway languageGateway = N2.Context.Current.GetLanguageGateway();
+                if (languageGateway != null)
+                {
+                    result = languageGateway.GetLanguage(contentItem);
+
+                    //
+                    // Cache
+
+                    HttpContext.Current.Items["CurrentLanguage"] = result;
+                }
+            }
+
 
             return result;
         }
