@@ -7,15 +7,24 @@ using N2.Plugin;
 using HereSay.Definitions;
 using N2.Web;
 using HereSay;
+using N2.Engine;
 
 namespace HereSay.Plugins.Caching
 {
     /// <summary>
     /// Decorates pages within HereSay with properties to manage caching.
     /// </summary>
-    [AutoInitialize]
+    [Service, AutoInitialize]
     public class CachingDecorator : AutoStarter
     {
+        private readonly IDefinitionManager definitions;
+
+        public CachingDecorator() { }
+        public CachingDecorator(IDefinitionManager definitions)
+        {
+            this.definitions = definitions;
+        }
+
         /// <summary>
         /// Modifies the given response's <see cref="System.Web.HttpResponse.Cache"/> to use the 
         /// desired cache settings.
@@ -23,7 +32,7 @@ namespace HereSay.Plugins.Caching
         private static void ApplicationInstance_AcquireRequestState(object sender, EventArgs e)
         {
             N2.ContentItem page = Find.CurrentPage;
-            
+
             if (page == null)
                 return;
 
@@ -31,14 +40,14 @@ namespace HereSay.Plugins.Caching
             // Set cacheability
 
             int cacheability = (int)(page.GetDetail<Cacheability>(CacheabilityName, Cacheability.Default));
-            
-            cacheability = (cacheability == (int)Cacheability.Default) 
-                ? (int)HttpCacheability.Private 
+
+            cacheability = (cacheability == (int)Cacheability.Default)
+                ? (int)HttpCacheability.Private
                 : cacheability;
 
             HttpCacheability httpCacheability = (HttpCacheability)cacheability;
             HttpResponse response = ((HttpApplication)sender).Response;
-            
+
             response.Cache.SetCacheability(httpCacheability);
 
             //
@@ -57,9 +66,9 @@ namespace HereSay.Plugins.Caching
         }
 
         #region Constants
-        public const string 
+        public const string
             CacheabilityHelpTitle = "Cacheability Values",
-            CacheabilityHelpText = 
+            CacheabilityHelpText =
                 "<ul><li><strong>NoCache</strong> sets the Cache-Control: no-cache header.<br/>"
                 + "<li><strong>Private</strong> (default) sets Cache-Control: private to specify that the response is cacheable only on the client and not by shared (proxy server) caches.</li>"
                 + "<li><strong>ServerAndNoCache</strong> Applies the settings of both Server and NoCache to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response.</li>"
@@ -70,7 +79,7 @@ namespace HereSay.Plugins.Caching
 
         public const string
             CacheDurationTitle = "Cache Duration (minutes)",
-            CacheDurationHelpText = 
+            CacheDurationHelpText =
                 "Specifies the number of minutes content is cached. A negative value will cause the server default to be used. "
                 + "1 hour = 60, 1 day = 1440, 1 week = 10080, 30 days = 43200, 1 month = 43829 (average), 1 year = 525948.",
             CacheDurationHelpTitle = "Cache Duration",
@@ -85,8 +94,8 @@ namespace HereSay.Plugins.Caching
         /// </summary>
         public override void Start()
         {
-            // foreach (ItemDefinition definition in this.Definitions)
-            Parallel.ForEach<ItemDefinition>(this.Definitions, definition =>
+            // foreach (ItemDefinition definition in definitions.GetDefinitions())
+            Parallel.ForEach<ItemDefinition>(this.definitions.GetDefinitions(), definition =>
             {
                 Type itemType = definition.ItemType;
                 if (IsPage(itemType))

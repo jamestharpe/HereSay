@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using N2.Definitions;
+using N2.Engine;
 using N2.Persistence;
+using N2.Plugin;
 
 namespace HereSay
 {
@@ -11,13 +13,9 @@ namespace HereSay
     /// <see cref="N2.Plugin.IPluginInitializer"/> to automatically registering the plug-in with 
     /// the N2 engine (<see cref="N2.Engine.IEngine"/>).
     /// </summary>
+    
     public class PluginInitializer : N2.Plugin.IPluginInitializer
     {
-        /// <summary>
-        /// Gets the <see cref="ItemDefinition"/>s available from N2 for decoration.
-        /// </summary>
-        protected readonly IEnumerable<ItemDefinition> Definitions = N2.Context.Definitions.GetDefinitions();
-        
         /// <summary>
         /// Implements <see cref="N2.Plugin.IPluginInitializer.Initialize"/> to register the 
         /// instance with N2 under its full type name.
